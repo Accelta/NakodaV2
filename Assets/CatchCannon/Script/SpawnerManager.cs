@@ -14,11 +14,11 @@ public class SpawnerManager : MonoBehaviour
 
     void ShootCannonballs()
     {
-        foreach (Transform cannon in cannonPositions)
-        {
-            GameObject cannonball = Instantiate(cannonballPrefab, cannon.position, Quaternion.identity);
-            Rigidbody rb = cannonball.GetComponent<Rigidbody>();
-            rb.AddForce(cannon.forward * shootForce, ForceMode.Impulse);
-        }
+        int randomIndex = Random.Range(0, cannonPositions.Length);
+        Transform selectedCannon = cannonPositions[randomIndex];
+        
+        GameObject cannonball = Instantiate(cannonballPrefab, selectedCannon.position, Quaternion.identity);
+        Rigidbody rb = cannonball.GetComponent<Rigidbody>();
+        rb.AddForce(selectedCannon.forward * shootForce, ForceMode.Impulse);
     }
 }
