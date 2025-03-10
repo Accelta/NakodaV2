@@ -5,11 +5,20 @@ public class Bullet : MonoBehaviour
     private float damage;
     public float lifetime = 5f; // Lifetime of the bullet in seconds
 
-    void Start()
+void OnEnable()
     {
-        // Schedule the bullet to be destroyed after its lifetime
-        Destroy(gameObject, lifetime);
+        Invoke("DeactivateBullet", lifetime);
     }
+     void DeactivateBullet()
+    {
+        BulletPool.Instance.ReturnBullet(gameObject);
+    }
+
+    // void Start()
+    // {
+    //     // Schedule the bullet to be destroyed after its lifetime
+    //     Destroy(gameObject, lifetime);
+    // }
 
     // Method to set damage from the enemy or player
     public void SetDamage(float damageAmount)
