@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: MoveToObjective
   m_EditorClassIdentifier: 
   objectiveDescription: 
-  targetPosition: {x: 0, y: 0, z: 0}
-  completionRadius: 3
+  targetPosition: {x: 15.75664, y: -0.23, z: 29.19602}
+  completionRadius: 10
