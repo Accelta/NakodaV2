@@ -3,24 +3,20 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "MoveToObjective", menuName = "Quests/Move Tutorial")]
 public class MoveTutorial : QuestObjective
 {
-    public Vector3 targetPosition;
-    private Transform playerTransform;
-    public float completionRadius = 3f; // Completion threshold
+     public string triggerTag = "QuestTrigger";  // Tag for the trigger in the scene
 
     public override void StartObjective()
     {
-        playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
-        if (playerTransform == null)
-        {
-            Debug.LogError("Player not found! Ensure the player has the 'Player' tag.");
-        }
+        Debug.Log($"Objective Started: Move to the area marked by {triggerTag}");
     }
 
     public override void CheckObjectiveCompletion()
     {
-        if (playerTransform != null && Vector3.Distance(playerTransform.position, targetPosition) < completionRadius)
-        {
-            CompleteObjective();
-        }
+        // Completion is now handled by the trigger in the scene
+    }
+
+    public void OnPlayerEnterTrigger()
+    {
+        CompleteObjective();
     }
 }

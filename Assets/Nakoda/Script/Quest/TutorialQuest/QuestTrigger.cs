@@ -6,9 +6,10 @@ public class QuestTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !linkedObjective.isCompleted)
+        if (other.CompareTag("Player"))
         {
-            linkedObjective.CheckObjectiveCompletion();
+            Debug.Log("Player entered quest area!");
+            linkedObjective.OnPlayerEnterTrigger();
         }
     }
 }

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 374bec1f314459e4dba42f3d295c64be, type: 3}
   m_Name: MoveToObjective
   m_EditorClassIdentifier: 
-  objectiveDescription: 
+  objectiveDescription: AreaStep
   targetPosition: {x: 15.75664, y: -0.23, z: 29.19602}
-  completionRadius: 10
+  completionRadius: 100

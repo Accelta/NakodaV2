@@ -3,29 +3,20 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ShootTargetTutorial", menuName = "Quests/Fire At Target")]
 public class ShootTarget : QuestObjective
 {
-     public GameObject targetObject;
-    private int hitCount = 0;
-    public int requiredHits = 1; // Adjust as needed
+ public string targetTag = "QuestTarget"; // Set tag for targets in the scene
 
     public override void StartObjective()
     {
-        if (targetObject == null)
-        {
-            Debug.LogError("Target object not assigned!");
-        }
+        Debug.Log($"Objective Started: Fire at an object tagged '{targetTag}'");
     }
 
     public override void CheckObjectiveCompletion()
     {
-        if (hitCount >= requiredHits)
-        {
-            CompleteObjective();
-        }
+        // The target itself calls TargetHit()
     }
 
-    public void RegisterHit()
+    public void TargetHit()
     {
-        hitCount++;
-        CheckObjectiveCompletion();
+        CompleteObjective();
     }
 }

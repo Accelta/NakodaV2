@@ -1,93 +1,72 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class QuestManager : MonoBehaviour
 {
-    public static QuestManager Instance;
-    public List<QuestData> availableQuests; // All possible quests in this level
-    public List<QuestData> activeQuests; // Quests that the player is currently doing
-    public List<QuestData> completedQuests; // Finished quests
+    public static QuestManager Instance { get; private set; }
 
-    public GameObject[] lockedRegions; // Reference to areas that will be unlocked
+    public List<QuestData> allQuests; // List of all quests in the game
+    public List<QuestData> activeQuests = new List<QuestData>();
+    public List<GameObject> barriers; // Barriers that should be removed when certain quests are completed
 
     private void Awake()
     {
-        if (Instance == null)
-            Instance = this;
-            else Destroy(gameObject);
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
     }
 
-    void Start()
+    private void Start()
     {
-        CheckForUnlockedQuests();
+        CheckAvailableQuests();
     }
 
-    public void StartQuest(QuestData quest)
+    public void CheckAvailableQuests()
     {
-        if (activeQuests.Contains(quest) || completedQuests.Contains(quest))
-            return;
-
-        // Check if all prerequisites are completed
-        foreach (QuestData requiredQuest in quest.requiredQuests)
+        foreach (var quest in allQuests)
         {
-            if (!completedQuests.Contains(requiredQuest))
+            if (!activeQuests.Contains(quest) && quest.CanStartQuest())
             {
-                Debug.LogWarning("Cannot start quest: " + quest.questName + " because " + requiredQuest.questName + " is not completed.");
-                return;
+                activeQuests.Add(quest);
+                Debug.Log($"Quest Started: {quest.questName}");
             }
         }
-
-        activeQuests.Add(quest);
-        Debug.Log("Quest Started: " + quest.questName);
     }
 
-    public void CompleteQuest(QuestData quest)
+    public void UpdateObjectives()
     {
-        if (!activeQuests.Contains(quest))
-            return;
-
-        activeQuests.Remove(quest);
-        completedQuests.Add(quest);
-        quest.isCompleted = true;
-        Debug.Log("Quest Completed: " + quest.questName);
-
-        if (quest.isMainQuest)
+        foreach (var quest in activeQuests)
         {
-            UnlockNextRegion();
-        }
-
-        CheckForUnlockedQuests();
-    }
-
-    void UnlockNextRegion()
-    {
-        foreach (GameObject region in lockedRegions)
-        {
-            region.SetActive(true); // Unlock the region
-        }
-        Debug.Log("New region unlocked!");
-    }
-
-    void CheckForUnlockedQuests()
-    {
-        foreach (QuestData quest in availableQuests)
-        {
-            if (!activeQuests.Contains(quest) && !completedQuests.Contains(quest))
+            if (quest.IsQuestCompleted())
             {
-                bool prerequisitesMet = true;
-                foreach (QuestData requiredQuest in quest.requiredQuests)
-                {
-                    if (!completedQuests.Contains(requiredQuest))
-                    {
-                        prerequisitesMet = false;
-                        break;
-                    }
-                }
+                Debug.Log($"Quest {quest.questName} Completed!");
+                UnlockNewQuests(quest);
+                RemoveBarriers(quest);
+            }
+        }
+    }
 
-                if (prerequisitesMet)
-                {
-                    StartQuest(quest);
-                }
+    private void UnlockNewQuests(QuestData completedQuest)
+    {
+        foreach (var quest in allQuests)
+        {
+            if (!activeQuests.Contains(quest) && quest.requiredQuest == completedQuest)
+            {
+                activeQuests.Add(quest);
+                Debug.Log($"New Quest Unlocked: {quest.questName}");
+            }
+        }
+    }
+
+    private void RemoveBarriers(QuestData completedQuest)
+    {
+        for (int i = barriers.Count - 1; i >= 0; i--)
+        {
+            Barrier barrier = barriers[i].GetComponent<Barrier>();
+            if (barrier != null && barrier.unlockingQuest == completedQuest)
+            {
+                Destroy(barriers[i]);
+                barriers.RemoveAt(i);
+                Debug.Log($"Barrier Removed: {barrier.gameObject.name}");
             }
         }
     }
