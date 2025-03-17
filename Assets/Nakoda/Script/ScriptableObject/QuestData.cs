@@ -18,4 +18,13 @@ public class QuestData : ScriptableObject
     {
         return requiredQuest == null || requiredQuest.IsQuestCompleted();
     }
+
+    public void StartQuest()
+    {
+        Debug.Log($"Quest Started: {questName}");
+        foreach (var objective in objectives)
+        {
+            objective.StartObjective();
+        }
+    }
 }

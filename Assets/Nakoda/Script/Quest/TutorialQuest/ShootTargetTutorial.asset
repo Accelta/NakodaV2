@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cdbb6cad297b7747b3f734eda2c3cc6, type: 3}
   m_Name: ShootTargetTutorial
   m_EditorClassIdentifier: 
-  objectiveDescription: 
-  targetObject: {fileID: 0}
-  requiredHits: 1
+  objectiveDescription: TutorialShoot
+  targetTag: QuestTarget

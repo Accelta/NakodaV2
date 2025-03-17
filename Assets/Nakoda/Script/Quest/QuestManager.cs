@@ -20,17 +20,17 @@ public class QuestManager : MonoBehaviour
         CheckAvailableQuests();
     }
 
-    public void CheckAvailableQuests()
+public void CheckAvailableQuests()
+{
+    foreach (var quest in allQuests)
     {
-        foreach (var quest in allQuests)
+        if (!activeQuests.Contains(quest) && quest.CanStartQuest())
         {
-            if (!activeQuests.Contains(quest) && quest.CanStartQuest())
-            {
-                activeQuests.Add(quest);
-                Debug.Log($"Quest Started: {quest.questName}");
-            }
+            activeQuests.Add(quest);
+            quest.StartQuest();  // 🔥 Now starts objectives when quest starts
         }
     }
+}
 
     public void UpdateObjectives()
     {
