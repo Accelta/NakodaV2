@@ -148,41 +148,6 @@ public class CannonRotation : MonoBehaviour
         barrel.localRotation = Quaternion.Euler(currentVerticalRotation, 0, 0);
     }
 
-    // void FireBullet()
-    // {
-    //     // Cek apakah BulletData tidak null
-    //     if (bulletData == null || bulletData.bulletPrefab == null)
-    //     {
-    //         Debug.LogError("BulletData atau Bullet Prefab tidak ditemukan!");
-    //         return;
-    //     }
-
-    //     // Spawn bullet dari ScriptableObject
-    //     GameObject bullet = Instantiate(bulletData.bulletPrefab, firePoint.position, firePoint.rotation);
-    //     bullet.SetActive(true);
-
-    //     // Tambahkan force ke bullet jika punya Rigidbody
-    //     Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
-    //     if (bulletRb != null)
-    //     {
-    //         bulletRb.AddForce(firePoint.forward * bulletData.bulletForce, ForceMode.Impulse);
-    //     }
-    //     else
-    //     {
-    //         Debug.LogError($"Prefab {bulletData.bulletPrefab.name} tidak memiliki Rigidbody! Pastikan prefab memiliki Rigidbody.");
-    //     }
-
-    //     // Atur damage peluru
-    //     Bullet bulletScript = bullet.GetComponent<Bullet>();
-    //     // if (bulletScript != null)
-    //     // {
-    //     //     bulletScript.SetDamage(bulletData.bulletDamage);
-    //     // }
-    //     // else
-    //     // {
-    //     //     Debug.LogWarning($"Prefab {bulletData.bulletPrefab.name} tidak memiliki script Bullet.cs! Pastikan prefab memiliki script.");
-    //     // }
-    // }
     void FireBullet()
 {
     if (bulletData == null || bulletData.bulletPrefab == null)
