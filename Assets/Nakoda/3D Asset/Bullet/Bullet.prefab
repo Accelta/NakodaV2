@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 6906012453617094224}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.277151, y: 10.190972, z: 42.05}
+  m_LocalPosition: {x: 10.743719, y: 12.3, z: 53.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -106,7 +106,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 5
+  impactEffectPrefab: {fileID: 0}
 --- !u!54 &9214991727939843178
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -165,6 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 5
+  impactEffectPrefab: {fileID: 1440544050547825468, guid: 14f9fcbb24a767f49aa86fc4c0f7ff86, type: 3}
 --- !u!96 &-2906782741408171045
 TrailRenderer:
   serializedVersion: 3
