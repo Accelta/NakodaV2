@@ -125,27 +125,13 @@ public class CameraController : MonoBehaviour
     public CinemachineCamera shipVirtualCamera;    
     public CinemachineCamera cannonVirtualCamera;  
     public CannonRotation cannonRotation;  
-    public Transform playerBody;  // Ship's transform
-    public Transform cameraPivot; // New pivot point for the camera
-
-    public float rotationSpeed = 100f;  
-    public float transitionSpeed = 2f;  
+    // public CameraRotation cameraRotation; // Reference to the new CameraRotation script
 
     private bool isUsingCannon = false;
-    private Quaternion originalCameraRotation;
-    private bool isRotatingCamera = false;
-    private bool isReturningToPosition = false;  
-
-    void Start()
-    {
-        originalCameraRotation = cameraPivot.localRotation; // Save original pivot rotation
-    }
 
     void Update()
     {
         HandleCameraSwitch();
-        HandleCameraRotation();
-        HandleCameraTransitionBack();
     }
 
     void HandleCameraSwitch()
@@ -158,53 +144,11 @@ public class CameraController : MonoBehaviour
             cannonVirtualCamera.gameObject.SetActive(isUsingCannon);
 
             cannonRotation.isRotationActive = isUsingCannon;
+            // cameraRotation.enabled = !isUsingCannon; // Enable rotation only when not using cannon
 
             Cursor.lockState = isUsingCannon ? CursorLockMode.Locked : CursorLockMode.None;
             Cursor.visible = !isUsingCannon;
         }
     }
-
-    void HandleCameraRotation()
-    {
-        if (!isUsingCannon)
-        {
-            if (Input.GetMouseButtonDown(1)) 
-            {
-                isRotatingCamera = true;
-                isReturningToPosition = false;  
-            }
-            if (Input.GetMouseButtonUp(1)) 
-            {
-                isRotatingCamera = false;
-                isReturningToPosition = true;  
-            }
-
-            if (isRotatingCamera)
-            {
-                RotateAroundPlayer();
-            }
-        }
-    }
-
-    void RotateAroundPlayer()
-    {
-        float mouseX = Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
-        cameraPivot.Rotate(Vector3.up, mouseX);  // Rotate the pivot instead of the camera
-    }
-
-    void HandleCameraTransitionBack()
-    {
-        if (isReturningToPosition)
-        {
-            cameraPivot.localRotation = Quaternion.Slerp(
-                cameraPivot.localRotation, 
-                originalCameraRotation, 
-                transitionSpeed * Time.deltaTime);
-
-            if (Quaternion.Angle(cameraPivot.localRotation, originalCameraRotation) < 0.01f)
-            {
-                isReturningToPosition = false;  
-            }
-        }
-    }
 }
+

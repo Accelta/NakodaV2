@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 250581262d1ab314abcef19216eb017a, type: 3}
   m_Name: BulletData
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 786704962907700717, guid: 35d6f64a4a0b1b74691ddfc889eb7546, type: 3}
-  bulletForce: 250
+  bulletPrefab: {fileID: 6906012453617094224, guid: fdda15e34646cfc4c926d925522049fb, type: 3}
+  bulletForce: 300
   bulletDamage: 20
