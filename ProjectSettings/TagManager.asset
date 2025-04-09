@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Boat
   - QuestTrigger
+  - Ground
   layers:
   - Default
   - TransparentFX
