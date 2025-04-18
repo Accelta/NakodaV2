@@ -187,7 +187,7 @@ float CalculateElevationAngle(float distance)
     return angleDeg;
 }
 
-    Transform FindNearestTarget()
+   Transform FindNearestTarget()
 {
     Collider[] hits = Physics.OverlapSphere(transform.position, detectionRange, enemyLayer);
     float closestDist = Mathf.Infinity;
@@ -197,7 +197,10 @@ float CalculateElevationAngle(float distance)
 
     foreach (var hit in hits)
     {
-        Vector3 toTarget = hit.transform.position - transform.position;
+        Rigidbody rb = hit.attachedRigidbody;
+        if (rb == null) continue;
+
+        Vector3 toTarget = rb.position - transform.position;
         float dist = toTarget.magnitude;
 
         // Angle from cannon forward to target (horizontal)
@@ -207,12 +210,13 @@ float CalculateElevationAngle(float distance)
         if (dist < closestDist && angle >= minHorizontalAngle && angle <= maxHorizontalAngle)
         {
             closestDist = dist;
-            nearest = hit.transform;
+            nearest = rb.transform;
         }
     }
 
     return nearest;
 }
+
 
 
     void FireBullet()
