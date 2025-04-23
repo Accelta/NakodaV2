@@ -15,9 +15,12 @@ public class PlayerMovementTst : MonoBehaviour
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
 
+    private Animator animator;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -27,12 +30,12 @@ public class PlayerMovementTst : MonoBehaviour
 
         if (isGrounded && velocity.y < 0)
         {
-            velocity.y = -2f; // Keeps the player grounded
+            velocity.y = -2f;
         }
 
         // Movement input
         float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        
 
         Vector3 move = transform.right * x ;
         controller.Move(move * moveSpeed * Time.deltaTime);
@@ -46,5 +49,9 @@ public class PlayerMovementTst : MonoBehaviour
         // Apply gravity
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+
+        // Animation Bools
+        animator.SetBool("IsForward", x > 0);  // moving right
+        animator.SetBool("IsBackward", x < 0); // moving left
     }
 }

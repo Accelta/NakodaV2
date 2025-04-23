@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7475877586724864615}
   - component: {fileID: 3411033886181275686}
   - component: {fileID: 2610661902297368753}
-  - component: {fileID: 1096380738557890353}
   - component: {fileID: 9214991727939843178}
   - component: {fileID: 347528451385136918}
   - component: {fileID: -2906782741408171045}
@@ -112,20 +111,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1096380738557890353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6906012453617094224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 161579b22a9de734f95c07abe5096c43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifetime: 5
-  impactEffectPrefab: {fileID: 0}
 --- !u!54 &9214991727939843178
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -165,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161579b22a9de734f95c07abe5096c43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 5
+  lifetime: 12
   impactEffectPrefab: {fileID: 1440544050547825468, guid: 14f9fcbb24a767f49aa86fc4c0f7ff86, type: 3}
 --- !u!96 &-2906782741408171045
 TrailRenderer:
