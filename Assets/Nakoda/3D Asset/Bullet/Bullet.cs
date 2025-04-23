@@ -55,7 +55,6 @@ public class Bullet : MonoBehaviour
     public GameObject impactEffectPrefab; // Efek impact saat terkena sesuatu
     private TrailRenderer trailRenderer; // Trail dari bullet
     private ParticleSystem trailParticle; // Partikel asap jika menggunakan Particle System
-
     void Awake()
     {
         // Ambil komponen Trail Renderer jika ada
@@ -107,7 +106,10 @@ public class Bullet : MonoBehaviour
             GameObject impactEffect = Instantiate(impactEffectPrefab, transform.position, Quaternion.identity);
             Destroy(impactEffect, 1f); // Hancurkan efek impact setelah 1 detik
         }
-
+         if (other.CompareTag("Shield"))
+         {
+            ScoreManager.Instance.AddScore(10); // Tambah skor jika peluru mengenai player
+         }
         // Matikan peluru setelah terkena sesuatu
         gameObject.SetActive(false);
     }
