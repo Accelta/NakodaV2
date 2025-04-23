@@ -2358,7 +2358,7 @@ Transform:
   m_GameObject: {fileID: 159501590103702100}
   serializedVersion: 2
   m_LocalRotation: {x: -0.021810345, y: 0.7360375, z: 0.032059837, w: 0.67582935}
-  m_LocalPosition: {x: 83.7, y: -5.6, z: 240.9}
+  m_LocalPosition: {x: 83.3, y: -0.5, z: 241}
   m_LocalScale: {x: 2.2869, y: 2.2869, z: 2.2869}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2431,6 +2431,8 @@ MonoBehaviour:
   - {fileID: 1489007939}
   - {fileID: 1196695940}
   - {fileID: 616040295}
+  showWaypoints: 1
+  waypointRadius: 0.5
 --- !u!4 &7043177812191894570
 Transform:
   m_ObjectHideFlags: 0

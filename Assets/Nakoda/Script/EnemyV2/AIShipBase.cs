@@ -169,5 +169,18 @@ public abstract class AIShipBase : MonoBehaviour
             Gizmos.DrawLine(transform.position, rayEnd);
             Gizmos.DrawWireSphere(rayEnd, sphereRadius);
         }
+
+        //Gizmoz visibility
+        if (showWaypoints && waypoints != null)
+        {
+            Gizmos.color = Color.yellow;
+            foreach (Transform waypoint in waypoints)
+            {
+                if (waypoint !=null)
+                {
+                    Gizmos.DrawSphere(waypoint.position, waypointRadius);
+                }
+            }
+        }
     }
 }
