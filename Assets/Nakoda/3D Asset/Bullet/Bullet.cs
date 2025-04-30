@@ -55,6 +55,8 @@ public class Bullet : MonoBehaviour
     public GameObject impactEffectPrefab; // Efek impact saat terkena sesuatu
     private TrailRenderer trailRenderer; // Trail dari bullet
     private ParticleSystem trailParticle; // Partikel asap jika menggunakan Particle System
+    
+
 
     void Awake()
     {

@@ -131,11 +131,11 @@ if (target == null)
     if (flatDir.sqrMagnitude > 0.0001f)
     {
         Quaternion desiredHoriz = Quaternion.LookRotation(flatDir);
-        mainBody.rotation = Quaternion.RotateTowards(
-            mainBody.rotation,
-            desiredHoriz,
-            rotationSpeed * Time.deltaTime
-        );
+        mainBody.localRotation = Quaternion.RotateTowards(
+        mainBody.localRotation,
+        Quaternion.Euler(defaultMainRotation),
+        rotationSpeed * Time.deltaTime
+);
     }
 
      // 4) Calculate vertical angle (both desired and calculated)
@@ -236,38 +236,29 @@ float CalculateElevationAngle(float distance)
         if (shootingAudio != null)
             shootingAudio.Play();
     }
-   void OnDrawGizmosSelected()
+void OnDrawGizmosSelected()
 {
-    if (mainBody == null)
-        return;
+    if (mainBody == null) return;
 
     Gizmos.color = Color.yellow;
 
-    // Draw detection range sphere (just base)
-    Gizmos.DrawWireSphere(transform.position, detectionRange);
-
-    // Forward direction of cannon base
-    Vector3 forward = mainBody.forward;
-
-    // Base rotation
-    Quaternion minAngleRot = Quaternion.AngleAxis(minHorizontalAngle, Vector3.up);
-    Quaternion maxAngleRot = Quaternion.AngleAxis(maxHorizontalAngle, Vector3.up);
-
-    // Points for min/max angle lines
-    Vector3 minDir = minAngleRot * forward;
-    Vector3 maxDir = maxAngleRot * forward;
+    // Use static forward direction (world space)
+    Vector3 forward = Vector3.forward; // or transform.forward for object-based
 
     Vector3 origin = transform.position;
 
-    // Draw min angle line
+    Quaternion minAngleRot = Quaternion.AngleAxis(minHorizontalAngle, Vector3.up);
+    Quaternion maxAngleRot = Quaternion.AngleAxis(maxHorizontalAngle, Vector3.up);
+
+    Vector3 minDir = minAngleRot * forward;
+    Vector3 maxDir = maxAngleRot * forward;
+
     Gizmos.color = Color.cyan;
     Gizmos.DrawLine(origin, origin + minDir.normalized * detectionRange);
 
-    // Draw max angle line
     Gizmos.color = Color.magenta;
     Gizmos.DrawLine(origin, origin + maxDir.normalized * detectionRange);
 
-    // Optional: fill arc wedge (for fancier visual)
     DrawDetectionArc(origin, forward, minHorizontalAngle, maxHorizontalAngle, detectionRange, 30);
 }
 
@@ -294,11 +285,11 @@ void DrawDetectionArc(Vector3 origin, Vector3 forward, float minAngle, float max
 void ReturnToDefaultRotation()
 {
     Quaternion defaultMainRot = Quaternion.Euler(defaultMainRotation);
-    mainBody.rotation = Quaternion.RotateTowards(
-        mainBody.rotation,
-        defaultMainRot,
+    mainBody.localRotation = Quaternion.RotateTowards(
+        mainBody.localRotation,
+        Quaternion.Euler(defaultMainRotation),
         rotationSpeed * Time.deltaTime
-    );
+);
 
     currentVerticalRotation = Mathf.MoveTowards(
         currentVerticalRotation,
