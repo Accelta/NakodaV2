@@ -8,6 +8,8 @@ TagManager:
   - QuestTrigger
   - Ground
   - Enemy
+  - Obstacle
+  - Shield
   layers:
   - Default
   - TransparentFX
@@ -17,7 +19,7 @@ TagManager:
   - UI
   - Player
   - Enemy
-  - 
+  - Obstacle
   - 
   - 
   - 
