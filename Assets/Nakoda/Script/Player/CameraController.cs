@@ -131,7 +131,7 @@ using Unity.Cinemachine;
 public class CameraController : MonoBehaviour
 {
     public CinemachineCamera shipVirtualCamera;
-    public CannonGroup[] cannonGroups; // 0 = front, 1 = left, 2 = right
+    public CannonGroup[] cannonGroups; // Index: 0 = front, 1 = left, 2 = right (example)
 
     private CannonGroup activeGroup;
     private bool isUsingCannon = false;
@@ -139,7 +139,11 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         HandleCameraSwitch();
-        HandleGroupSwitch();
+
+        if (isUsingCannon)
+        {
+            HandleGroupNumberSwitch();
+        }
     }
 
     void HandleCameraSwitch()
@@ -161,17 +165,42 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    void HandleGroupSwitch()
+    void HandleGroupNumberSwitch()
     {
-        if (!isUsingCannon) return;
-
         if (Input.GetKeyDown(KeyCode.Alpha1) && cannonGroups.Length > 0)
             SwitchToGroup(0);
-        else if (Input.GetKeyDown(KeyCode.Alpha2) && cannonGroups.Length > 1)
+
+        if (Input.GetKeyDown(KeyCode.Alpha2) && cannonGroups.Length > 1)
             SwitchToGroup(1);
-        else if (Input.GetKeyDown(KeyCode.Alpha3) && cannonGroups.Length > 2)
+
+        if (Input.GetKeyDown(KeyCode.Alpha3) && cannonGroups.Length > 2)
             SwitchToGroup(2);
+
+        // Add more if you have more groups
     }
+
+    void SwitchToGroup(int index)
+{
+    if (index < 0 || index >= cannonGroups.Length)
+        return;
+
+    if (activeGroup != null)
+    {
+        activeGroup.SetActive(false);
+
+        // Reset previous group's cannons to auto if they are not front
+        foreach (var cannon in activeGroup.cannons)
+        {
+            cannon.isRotationActive = false;
+            cannon.autoMode = true;
+            if (cannon.cannonSide == CannonRotation.CannonSide.Front)
+                cannon.autoMode = false;
+        }
+    }
+
+    activeGroup = cannonGroups[index];
+    activeGroup.SetActive(true);
+}
 
     void EnterCannonMode(CannonGroup group)
     {
@@ -195,7 +224,9 @@ public class CameraController : MonoBehaviour
             foreach (var cannon in activeGroup.cannons)
             {
                 cannon.isRotationActive = false;
-                cannon.autoMode = cannon.cannonSide != CannonRotation.CannonSide.Front;
+                cannon.autoMode = true;
+                if (cannon.cannonSide == CannonRotation.CannonSide.Front)
+                    cannon.autoMode = false;
             }
         }
 
@@ -205,18 +236,6 @@ public class CameraController : MonoBehaviour
         Cursor.visible = true;
 
         activeGroup = null;
-    }
-
-    void SwitchToGroup(int index)
-    {
-        if (index < 0 || index >= cannonGroups.Length || cannonGroups[index] == activeGroup)
-            return;
-
-        if (activeGroup != null)
-            activeGroup.SetActive(false);
-
-        activeGroup = cannonGroups[index];
-        activeGroup.SetActive(true);
     }
 
     CannonGroup FindGroupInView()
