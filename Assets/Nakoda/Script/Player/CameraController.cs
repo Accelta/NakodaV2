@@ -3,118 +3,126 @@
 
 // public class CameraController : MonoBehaviour
 // {
-//     public CinemachineCamera shipVirtualCamera;    // Reference to the ship's virtual camera
-//     public CinemachineCamera cannonVirtualCamera;  // Reference to the cannon's virtual camera
-//     public CannonRotation cannonRotation;  // Reference to the CannonRotation script
-//     public Transform playerBody;  // Reference to the player's body for rotating around
-
-//     public float rotationSpeed = 100f;  // Speed of camera rotation
-//     public float transitionSpeed = 2f;  // Speed of returning to the original position
+//     public CinemachineCamera shipVirtualCamera;    
+//     public CinemachineCamera cannonVirtualCamera;  
+//     public CannonRotation cannonRotation;  
+//     // public CameraRotation cameraRotation; // Reference to the new CameraRotation script
 
 //     private bool isUsingCannon = false;
-//     private Vector3 originalCameraPosition;
-//     private Quaternion originalCameraRotation;
-//     private bool isRotatingCamera = false;
-//     private bool isReturningToPosition = false;  // Flag for transitioning back
-
-//     void Start()
-//     {
-//         // Save the original camera position and rotation
-//         originalCameraPosition = shipVirtualCamera.transform.localPosition;
-//         originalCameraRotation = shipVirtualCamera.transform.localRotation;
-//     }
 
 //     void Update()
 //     {
 //         HandleCameraSwitch();
-//         HandleCameraRotation();
-//         HandleCameraTransitionBack();
 //     }
 
-//     // Switch between ship and cannon camera
 //     void HandleCameraSwitch()
 //     {
 //         if (Input.GetKeyDown(KeyCode.F))
 //         {
 //             isUsingCannon = !isUsingCannon;
 
-//             // Toggle between ship camera and cannon camera
 //             shipVirtualCamera.gameObject.SetActive(!isUsingCannon);
 //             cannonVirtualCamera.gameObject.SetActive(isUsingCannon);
 
-//             // Enable cannon rotation only when using the cannon
 //             cannonRotation.isRotationActive = isUsingCannon;
+//             // cameraRotation.enabled = !isUsingCannon; // Enable rotation only when not using cannon
 
-//             // Lock the cursor when using the cannon camera
-//             if (isUsingCannon)
+//             Cursor.lockState = isUsingCannon ? CursorLockMode.Locked : CursorLockMode.None;
+//             Cursor.visible = !isUsingCannon;
+//         }
+//     }
+// }
+
+// using UnityEngine;
+// using Unity.Cinemachine;
+
+// public class CameraController : MonoBehaviour
+// {
+
+//     public CinemachineCamera shipVirtualCamera;
+//     public CannonGroup[] cannonGroups;
+
+//     private CannonGroup activeGroup;
+//     private bool isUsingCannon = false;
+//     void Update()
+//     {
+//         HandleCameraSwitch();
+//     }
+
+//     void HandleCameraSwitch()
+//     {
+//         if (Input.GetKeyDown(KeyCode.F))
+//         {
+//             if (!isUsingCannon)
 //             {
-//                 Cursor.lockState = CursorLockMode.Locked;
-//                 Cursor.visible = false;
+//                 CannonGroup candidate = FindGroupInView();
+//                 if (candidate != null)
+//                 {
+//                     isUsingCannon = true;
+//                     activeGroup = candidate;
+
+//                     shipVirtualCamera.gameObject.SetActive(false);
+//                     activeGroup.SetActive(true);
+
+//                     Cursor.lockState = CursorLockMode.Locked;
+//                     Cursor.visible = false;
+//                 }
 //             }
 //             else
 //             {
-//                 Cursor.lockState = CursorLockMode.None;
-//                 Cursor.visible = true;
+//                 ExitCannonMode();
 //             }
 //         }
 //     }
 
-//     // Handle camera rotation around the player
-//     void HandleCameraRotation()
+//     void ExitCannonMode()
 //     {
-//         if (!isUsingCannon)
+//         isUsingCannon = false;
+
+//         if (activeGroup != null)
 //         {
-//             if (Input.GetMouseButtonDown(1)) // Right mouse button pressed
+//             activeGroup.SetActive(false);
+//             foreach (var cannon in activeGroup.cannons)
 //             {
-//                 isRotatingCamera = true;
-//                 isReturningToPosition = false;  // Stop returning to position while rotating
-//             }
-//             if (Input.GetMouseButtonUp(1)) // Right mouse button released
-//             {
-//                 isRotatingCamera = false;
-//                 isReturningToPosition = true;  // Start the smooth transition back
+//                 cannon.isRotationActive = false; // override internal control
+//                 cannon.autoMode = true;
+//                 if (cannon.cannonSide == CannonRotation.CannonSide.Front)
+//                 {
+//                     cannon.autoMode = false;
+//                 }
+
 //             }
 
-//             if (isRotatingCamera)
-//             {
-//                 RotateAroundPlayer();  // Rotate around the player
-//             }
 //         }
+        
+
+//         shipVirtualCamera.gameObject.SetActive(true);
+
+//         Cursor.lockState = CursorLockMode.None;
+//         Cursor.visible = true;
+
+//         activeGroup = null;
 //     }
 
-//     // Rotate the camera around the player
-//     void RotateAroundPlayer()
+//     CannonGroup FindGroupInView()
 //     {
-//         float mouseX = Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
+//         Vector3 camForward = Camera.main.transform.forward;
+//         CannonGroup bestGroup = null;
+//         float bestDot = -1f;
 
-//         // Rotate around the player body on the Y-axis
-//         shipVirtualCamera.transform.RotateAround(playerBody.position, Vector3.up, mouseX);
-//     }
-
-//     // Handle smooth transition back to the original position
-//     void HandleCameraTransitionBack()
-//     {
-//         if (isReturningToPosition)
+//         foreach (var group in cannonGroups)
 //         {
-//             // Smoothly move the camera back to the original position
-//             shipVirtualCamera.transform.localPosition = Vector3.Lerp(
-//                 shipVirtualCamera.transform.localPosition, 
-//                 originalCameraPosition, 
-//                 transitionSpeed * Time.deltaTime);
+//             Vector3 toGroup = (group.transform.position - Camera.main.transform.position).normalized;
+//             float dot = Vector3.Dot(camForward, toGroup);
 
-//             // Smoothly rotate the camera back to the original rotation
-//             shipVirtualCamera.transform.localRotation = Quaternion.Slerp(
-//                 shipVirtualCamera.transform.localRotation, 
-//                 originalCameraRotation, 
-//                 transitionSpeed * Time.deltaTime);
-
-//             // Stop transitioning if the camera is close to the original position and rotation
-//             if (Vector3.Distance(shipVirtualCamera.transform.localPosition, originalCameraPosition) < 0.01f &&
-//                 Quaternion.Angle(shipVirtualCamera.transform.localRotation, originalCameraRotation) < 0.01f)
+//             if (dot > bestDot && dot > 0.85f)
 //             {
-//                 isReturningToPosition = false;  // Transition complete
+//                 bestDot = dot;
+//                 bestGroup = group;
 //             }
 //         }
+
+//         return bestGroup;
 //     }
 // }
 using UnityEngine;
@@ -122,33 +130,113 @@ using Unity.Cinemachine;
 
 public class CameraController : MonoBehaviour
 {
-    public CinemachineCamera shipVirtualCamera;    
-    public CinemachineCamera cannonVirtualCamera;  
-    public CannonRotation cannonRotation;  
-    // public CameraRotation cameraRotation; // Reference to the new CameraRotation script
+    public CinemachineCamera shipVirtualCamera;
+    public CannonGroup[] cannonGroups; // 0 = front, 1 = left, 2 = right
 
+    private CannonGroup activeGroup;
     private bool isUsingCannon = false;
 
     void Update()
     {
         HandleCameraSwitch();
+        HandleGroupSwitch();
     }
 
     void HandleCameraSwitch()
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            isUsingCannon = !isUsingCannon;
-
-            shipVirtualCamera.gameObject.SetActive(!isUsingCannon);
-            cannonVirtualCamera.gameObject.SetActive(isUsingCannon);
-
-            cannonRotation.isRotationActive = isUsingCannon;
-            // cameraRotation.enabled = !isUsingCannon; // Enable rotation only when not using cannon
-
-            Cursor.lockState = isUsingCannon ? CursorLockMode.Locked : CursorLockMode.None;
-            Cursor.visible = !isUsingCannon;
+            if (!isUsingCannon)
+            {
+                CannonGroup candidate = FindGroupInView();
+                if (candidate != null)
+                {
+                    EnterCannonMode(candidate);
+                }
+            }
+            else
+            {
+                ExitCannonMode();
+            }
         }
     }
-}
 
+    void HandleGroupSwitch()
+    {
+        if (!isUsingCannon) return;
+
+        if (Input.GetKeyDown(KeyCode.Alpha1) && cannonGroups.Length > 0)
+            SwitchToGroup(0);
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && cannonGroups.Length > 1)
+            SwitchToGroup(1);
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && cannonGroups.Length > 2)
+            SwitchToGroup(2);
+    }
+
+    void EnterCannonMode(CannonGroup group)
+    {
+        isUsingCannon = true;
+        activeGroup = group;
+
+        shipVirtualCamera.gameObject.SetActive(false);
+        activeGroup.SetActive(true);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    void ExitCannonMode()
+    {
+        isUsingCannon = false;
+
+        if (activeGroup != null)
+        {
+            activeGroup.SetActive(false);
+            foreach (var cannon in activeGroup.cannons)
+            {
+                cannon.isRotationActive = false;
+                cannon.autoMode = cannon.cannonSide != CannonRotation.CannonSide.Front;
+            }
+        }
+
+        shipVirtualCamera.gameObject.SetActive(true);
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        activeGroup = null;
+    }
+
+    void SwitchToGroup(int index)
+    {
+        if (index < 0 || index >= cannonGroups.Length || cannonGroups[index] == activeGroup)
+            return;
+
+        if (activeGroup != null)
+            activeGroup.SetActive(false);
+
+        activeGroup = cannonGroups[index];
+        activeGroup.SetActive(true);
+    }
+
+    CannonGroup FindGroupInView()
+    {
+        Vector3 camForward = Camera.main.transform.forward;
+        CannonGroup bestGroup = null;
+        float bestDot = -1f;
+
+        foreach (var group in cannonGroups)
+        {
+            Vector3 toGroup = (group.transform.position - Camera.main.transform.position).normalized;
+            float dot = Vector3.Dot(camForward, toGroup);
+
+            if (dot > bestDot && dot > 0.85f)
+            {
+                bestDot = dot;
+                bestGroup = group;
+            }
+        }
+
+        return bestGroup;
+    }
+}

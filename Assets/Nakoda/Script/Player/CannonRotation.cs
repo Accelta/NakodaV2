@@ -1,8 +1,8 @@
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class CannonRotation : MonoBehaviour
 {
-    public Animator cannonAnimator;
     public Transform mainBody;  // Horizontal rotation
     public Transform barrel;    // Vertical rotation
 
@@ -16,6 +16,9 @@ public class CannonRotation : MonoBehaviour
     public float maxHorizontalRotation = 60f;
     public float minVerticalRotation = -10f;
     public float maxVerticalRotation = 30f;
+    public enum CannonSide { Front, Left, Right }
+    public CannonSide cannonSide;
+
 
     [Header("Detection Area")]
     public float minHorizontalAngle = -90f; // left limit
@@ -44,6 +47,7 @@ public class CannonRotation : MonoBehaviour
 
     private float targetLostTime = -1f;
     private bool returningToDefault = false;
+
 
     void Start()
     {
@@ -87,68 +91,67 @@ public class CannonRotation : MonoBehaviour
         barrel.localRotation = Quaternion.Euler(currentVerticalRotation, 0, 0);
     }
 
-void HandleAutoTargeting()
+    void HandleAutoTargeting()
 {
     // 1) Refresh target if needed
-    if (target == null || Vector3.Distance(transform.position, target.position) > detectionRange)
-    {
-        if (target != null)
-            target = null;
+if (target == null || Vector3.Distance(transform.position, target.position) > detectionRange)
+{
+    
+    if (target != null)
+        target = null;
 
-        if (targetLostTime < 0f)
-            targetLostTime = Time.time;
-
+    if (targetLostTime < 0f)
+        targetLostTime = Time.time;
         target = FindNearestTarget();
+}
+else
+{
+    targetLostTime = -1f;
+    returningToDefault = false;
+}
 
-        if (target != null)
-        {
-            targetLostTime = -1f;
-            returningToDefault = false;
-        }
-    }
-
-    // If target is null for a while, return to default
-    if (target == null)
+// If target is null for a while, return to default
+if (target == null)
+{
+    if (Time.time - targetLostTime >= returnDelay)
     {
-        if (Time.time - targetLostTime >= returnDelay)
-        {
-            returningToDefault = true;
-        }
-
-        if (returningToDefault)
-        {
-            ReturnToDefaultRotation();
-        }
-
-        return;
+        returningToDefault = true;
     }
+
+    if (returningToDefault)
+    {
+        ReturnToDefaultRotation();
+    }
+
+    return;
+}
 
     // 2) Compute direction & distance
     Vector3 dirToTarget = target.position - firePoint.position;
     float dist = dirToTarget.magnitude;
     if (dist < 1f) return; // dead‑zone
 
-    // 3) Horizontal rotation (corrected to look at target)
+    // 3) Horizontal rotation (guarded)
     Vector3 flatDir = new Vector3(dirToTarget.x, 0, dirToTarget.z);
     if (flatDir.sqrMagnitude > 0.0001f)
     {
         Quaternion desiredHoriz = Quaternion.LookRotation(flatDir);
-        mainBody.rotation = Quaternion.RotateTowards(
-        mainBody.rotation,
-        desiredHoriz,
+        mainBody.localRotation = Quaternion.RotateTowards(
+        mainBody.localRotation,
+        Quaternion.Euler(defaultMainRotation),
         rotationSpeed * Time.deltaTime
-        );
+);
     }
 
-    // 4) Calculate vertical angle (both desired and calculated)
-    float desiredVerticalAngle = Mathf.Atan2(dirToTarget.y, flatDir.magnitude) * Mathf.Rad2Deg;
-    float calculatedVerticalAngle = CalculateElevationAngle(dist);
+     // 4) Calculate vertical angle (both desired and calculated)
+    float desiredVerticalAngle = CalculateDesiredVerticalAngle(dirToTarget); // This calculates vertical based on the target
+    float calculatedVerticalAngle = CalculateElevationAngle(dist); // This is based on projectile physics
 
-    // 5) Blend the vertical angles
-    float blendedVerticalAngle = Mathf.Lerp(desiredVerticalAngle, calculatedVerticalAngle, 0.5f);
+    // 5) Blend the vertical angles (weighted average or smoothing)
+    float blendedVerticalAngle = Mathf.Lerp(desiredVerticalAngle, calculatedVerticalAngle, 0.5f); // You can adjust the blend factor (0.5f) for more influence on one angle
+
+    // 6) Smoothly rotate the barrel to the blended vertical angle
     blendedVerticalAngle = Mathf.Clamp(blendedVerticalAngle, minVerticalRotation, maxVerticalRotation);
-
-    // 6) Smooth vertical rotation
     currentVerticalRotation = Mathf.MoveTowards(
         currentVerticalRotation,
         blendedVerticalAngle,
@@ -156,7 +159,7 @@ void HandleAutoTargeting()
     );
     barrel.localRotation = Quaternion.Euler(currentVerticalRotation, 0, 0);
 
-    // 7) Fire only if aiming is aligned
+    // 7) Only fire if aimed within threshold
     float horizAngle = Vector3.Angle(mainBody.forward, flatDir.normalized);
     float vertAngle = Mathf.Abs(currentVerticalRotation - blendedVerticalAngle);
 
@@ -167,8 +170,7 @@ void HandleAutoTargeting()
     }
 }
 
-
-float CalculateDesiredVerticalAngle(Vector3 dirToTarget)
+public float CalculateDesiredVerticalAngle(Vector3 dirToTarget)
 {
     // Calculate the angle between the cannon's forward vector and the target
     return Vector3.SignedAngle(mainBody.forward, dirToTarget, mainBody.right);
@@ -189,8 +191,31 @@ float CalculateElevationAngle(float distance)
 
     return angleDeg;
 }
+public void RotateManually(float horizInput, float vertInput)
+{
+    float targetHoriz = currentHorizontalRotation + horizInput;
+    float deltaHoriz = Mathf.DeltaAngle(0, targetHoriz);
+    currentHorizontalRotation = Mathf.Clamp(deltaHoriz, -maxHorizontalRotation, maxHorizontalRotation);
+    mainBody.localRotation = Quaternion.Euler(0, currentHorizontalRotation, 0);
 
-   Transform FindNearestTarget()
+    currentVerticalRotation = Mathf.Clamp(currentVerticalRotation + vertInput, minVerticalRotation, maxVerticalRotation);
+    barrel.localRotation = Quaternion.Euler(currentVerticalRotation, 0, 0);
+}
+
+public void SetRotation(Quaternion horizRot, float verticalAngle, float speed)
+{
+    mainBody.localRotation = Quaternion.RotateTowards(mainBody.localRotation, horizRot, speed * Time.deltaTime);
+
+    currentVerticalRotation = Mathf.MoveTowards(currentVerticalRotation, verticalAngle, speed * Time.deltaTime);
+    currentVerticalRotation = Mathf.Clamp(currentVerticalRotation, minVerticalRotation, maxVerticalRotation);
+    barrel.localRotation = Quaternion.Euler(currentVerticalRotation, 0, 0);
+}
+
+public float GetCurrentVerticalAngle()
+{
+    return currentVerticalRotation;
+}
+   public Transform FindNearestTarget()
 {
     Collider[] hits = Physics.OverlapSphere(transform.position, detectionRange, enemyLayer);
     float closestDist = Mathf.Infinity;
@@ -222,7 +247,7 @@ float CalculateElevationAngle(float distance)
 
 
 
-    void FireBullet()
+    public void FireBullet()
     {
         if (bulletData == null || bulletData.bulletPrefab == null) return;
 
@@ -235,44 +260,33 @@ float CalculateElevationAngle(float distance)
             rb.linearVelocity = Vector3.zero;
             rb.AddForce(firePoint.forward * bulletData.bulletForce, ForceMode.Impulse);
         }
-        if (cannonAnimator != null)
-        cannonAnimator.SetTrigger("Fire");
 
         if (shootingAudio != null)
             shootingAudio.Play();
     }
-   void OnDrawGizmosSelected()
+void OnDrawGizmosSelected()
 {
-    if (mainBody == null)
-        return;
+    if (mainBody == null) return;
 
     Gizmos.color = Color.yellow;
 
-    // Draw detection range sphere (just base)
-    Gizmos.DrawWireSphere(transform.position, detectionRange);
-
-    // Forward direction of cannon base
-    Vector3 forward = mainBody.forward;
-
-    // Base rotation
-    Quaternion minAngleRot = Quaternion.AngleAxis(minHorizontalAngle, Vector3.up);
-    Quaternion maxAngleRot = Quaternion.AngleAxis(maxHorizontalAngle, Vector3.up);
-
-    // Points for min/max angle lines
-    Vector3 minDir = minAngleRot * forward;
-    Vector3 maxDir = maxAngleRot * forward;
+    // Use static forward direction (world space)
+    Vector3 forward = Vector3.forward; // or transform.forward for object-based
 
     Vector3 origin = transform.position;
 
-    // Draw min angle line
+    Quaternion minAngleRot = Quaternion.AngleAxis(minHorizontalAngle, Vector3.up);
+    Quaternion maxAngleRot = Quaternion.AngleAxis(maxHorizontalAngle, Vector3.up);
+
+    Vector3 minDir = minAngleRot * forward;
+    Vector3 maxDir = maxAngleRot * forward;
+
     Gizmos.color = Color.cyan;
     Gizmos.DrawLine(origin, origin + minDir.normalized * detectionRange);
 
-    // Draw max angle line
     Gizmos.color = Color.magenta;
     Gizmos.DrawLine(origin, origin + maxDir.normalized * detectionRange);
 
-    // Optional: fill arc wedge (for fancier visual)
     DrawDetectionArc(origin, forward, minHorizontalAngle, maxHorizontalAngle, detectionRange, 30);
 }
 
