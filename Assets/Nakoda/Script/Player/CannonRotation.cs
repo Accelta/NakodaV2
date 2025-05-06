@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class CannonRotation : MonoBehaviour
@@ -15,6 +16,9 @@ public class CannonRotation : MonoBehaviour
     public float maxHorizontalRotation = 60f;
     public float minVerticalRotation = -10f;
     public float maxVerticalRotation = 30f;
+    public enum CannonSide { Front, Left, Right }
+    public CannonSide cannonSide;
+
 
     [Header("Detection Area")]
     public float minHorizontalAngle = -90f; // left limit
@@ -43,6 +47,7 @@ public class CannonRotation : MonoBehaviour
 
     private float targetLostTime = -1f;
     private bool returningToDefault = false;
+
 
     void Start()
     {
@@ -165,7 +170,7 @@ if (target == null)
     }
 }
 
-float CalculateDesiredVerticalAngle(Vector3 dirToTarget)
+public float CalculateDesiredVerticalAngle(Vector3 dirToTarget)
 {
     // Calculate the angle between the cannon's forward vector and the target
     return Vector3.SignedAngle(mainBody.forward, dirToTarget, mainBody.right);
@@ -186,8 +191,31 @@ float CalculateElevationAngle(float distance)
 
     return angleDeg;
 }
+public void RotateManually(float horizInput, float vertInput)
+{
+    float targetHoriz = currentHorizontalRotation + horizInput;
+    float deltaHoriz = Mathf.DeltaAngle(0, targetHoriz);
+    currentHorizontalRotation = Mathf.Clamp(deltaHoriz, -maxHorizontalRotation, maxHorizontalRotation);
+    mainBody.localRotation = Quaternion.Euler(0, currentHorizontalRotation, 0);
 
-   Transform FindNearestTarget()
+    currentVerticalRotation = Mathf.Clamp(currentVerticalRotation + vertInput, minVerticalRotation, maxVerticalRotation);
+    barrel.localRotation = Quaternion.Euler(currentVerticalRotation, 0, 0);
+}
+
+public void SetRotation(Quaternion horizRot, float verticalAngle, float speed)
+{
+    mainBody.localRotation = Quaternion.RotateTowards(mainBody.localRotation, horizRot, speed * Time.deltaTime);
+
+    currentVerticalRotation = Mathf.MoveTowards(currentVerticalRotation, verticalAngle, speed * Time.deltaTime);
+    currentVerticalRotation = Mathf.Clamp(currentVerticalRotation, minVerticalRotation, maxVerticalRotation);
+    barrel.localRotation = Quaternion.Euler(currentVerticalRotation, 0, 0);
+}
+
+public float GetCurrentVerticalAngle()
+{
+    return currentVerticalRotation;
+}
+   public Transform FindNearestTarget()
 {
     Collider[] hits = Physics.OverlapSphere(transform.position, detectionRange, enemyLayer);
     float closestDist = Mathf.Infinity;
@@ -219,7 +247,7 @@ float CalculateElevationAngle(float distance)
 
 
 
-    void FireBullet()
+    public void FireBullet()
     {
         if (bulletData == null || bulletData.bulletPrefab == null) return;
 
