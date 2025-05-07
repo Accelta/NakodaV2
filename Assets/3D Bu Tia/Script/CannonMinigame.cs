@@ -34,6 +34,15 @@ public class CannonMinigame : MonoBehaviour
         if (bulletData == null || bulletData.bulletPrefab == null) return;
 
         GameObject bullet = Instantiate(bulletData.bulletPrefab, firePoint.position, firePoint.rotation);
+
+        // 👉 Set the damage using BulletData
+         Bullet bulletScript = bullet.GetComponent<Bullet>();
+        if (bulletScript != null)
+        {
+        bulletScript.SetDamage(bulletData.bulletDamage);
+        }
+
+
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         if (rb != null)
         {

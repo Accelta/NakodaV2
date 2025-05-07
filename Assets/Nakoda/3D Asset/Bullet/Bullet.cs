@@ -113,4 +113,14 @@ public class Bullet : MonoBehaviour
         // Matikan peluru setelah terkena sesuatu
         gameObject.SetActive(false);
     }
+     private void OnCollisionEnter(Collision collision)
+    {
+        Health health = collision.gameObject.GetComponent<Health>();
+        if (health != null)
+        {
+            health.TakeDamage(damage); // Call the TakeDamage method
+        }
+
+        Destroy(gameObject); // Destroy the bullet on impact
+    }
 }
