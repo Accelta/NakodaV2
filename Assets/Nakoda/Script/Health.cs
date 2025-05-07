@@ -11,6 +11,9 @@ public class Health : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+        // PlayerPrefs.SetFloat("PlayerHealth", currentHealth);
+        // PlayerPrefs.Save();
+        // float savedHealth = PlayerPrefs.GetFloat("PlayerHealth");
     }
 
     public void InitializeHealth(float healthAmount)
@@ -21,12 +24,17 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float damageAmount)
     {
+
         currentHealth -= damageAmount;
         Debug.Log($"{gameObject.name} hit!");
 
         if (currentHealth <= 0f)
         {
             Die();
+        }
+        else if (currentHealth <= 0f && gameObject.CompareTag("Ship"))
+        {
+            PauseGame();
         }
     }
 
@@ -35,5 +43,10 @@ public class Health : MonoBehaviour
         Debug.Log($"{gameObject.name} died!");
         OnDeath?.Invoke();
         Destroy(gameObject);
+    }
+void PauseGame()
+    {
+        Time.timeScale = 0f; // Pause the game
+        Debug.Log("Game Over! The ship was hit.");
     }
 }
