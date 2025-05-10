@@ -1,3 +1,4 @@
+using TMPro;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -6,7 +7,6 @@ public class CannonGroup : MonoBehaviour
     [Header("Cannon Group Settings")]
     public CinemachineCamera groupCamera;
     public CannonRotation[] cannons;
-
     public bool isAutoMode = false;
     public float rotationSpeed = 50f;
     public float fireRate = 1f;
@@ -14,6 +14,8 @@ public class CannonGroup : MonoBehaviour
 
     private float nextFireTime = 0f;
     private bool isActive = false;
+    public enum cannonGroups {Front, Left, Right}
+    public cannonGroups groupname;
     
     void Update()
     {

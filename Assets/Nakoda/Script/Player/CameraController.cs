@@ -127,11 +127,13 @@
 // }
 using UnityEngine;
 using Unity.Cinemachine;
+using TMPro;
 
 public class CameraController : MonoBehaviour
 {
     public CinemachineCamera shipVirtualCamera;
     public CannonGroup[] cannonGroups; // Index: 0 = front, 1 = left, 2 = right (example)
+    public TextMeshProUGUI cannongrouptext;
 
     private CannonGroup activeGroup;
     private bool isUsingCannon = false;
@@ -179,7 +181,7 @@ public class CameraController : MonoBehaviour
         // Add more if you have more groups
     }
 
-    void SwitchToGroup(int index)
+   void SwitchToGroup(int index)
 {
     if (index < 0 || index >= cannonGroups.Length)
         return;
@@ -188,7 +190,6 @@ public class CameraController : MonoBehaviour
     {
         activeGroup.SetActive(false);
 
-        // Reset previous group's cannons to auto if they are not front
         foreach (var cannon in activeGroup.cannons)
         {
             cannon.isRotationActive = false;
@@ -200,6 +201,13 @@ public class CameraController : MonoBehaviour
 
     activeGroup = cannonGroups[index];
     activeGroup.SetActive(true);
+
+    // Show active group name
+    if (cannongrouptext != null)
+    {
+        cannongrouptext.text = "Using " + activeGroup.groupname + " Cannons";
+        cannongrouptext.gameObject.SetActive(true);
+    }
 }
 
     void EnterCannonMode(CannonGroup group)
@@ -215,28 +223,35 @@ public class CameraController : MonoBehaviour
     }
 
     void ExitCannonMode()
+{
+    isUsingCannon = false;
+
+    if (activeGroup != null)
     {
-        isUsingCannon = false;
-
-        if (activeGroup != null)
+        activeGroup.SetActive(false);
+        foreach (var cannon in activeGroup.cannons)
         {
-            activeGroup.SetActive(false);
-            foreach (var cannon in activeGroup.cannons)
-            {
-                cannon.isRotationActive = false;
-                cannon.autoMode = true;
-                if (cannon.cannonSide == CannonRotation.CannonSide.Front)
-                    cannon.autoMode = false;
-            }
+            cannon.isRotationActive = false;
+            cannon.autoMode = true;
+            if (cannon.cannonSide == CannonRotation.CannonSide.Front)
+                cannon.autoMode = false;
         }
-
-        shipVirtualCamera.gameObject.SetActive(true);
-
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-
-        activeGroup = null;
     }
+
+    shipVirtualCamera.gameObject.SetActive(true);
+
+    Cursor.lockState = CursorLockMode.None;
+    Cursor.visible = true;
+
+    activeGroup = null;
+
+    // Hide text
+    if (cannongrouptext != null)
+    {
+        cannongrouptext.text = "";
+        cannongrouptext.gameObject.SetActive(false);
+    }
+}
 
     CannonGroup FindGroupInView()
     {
