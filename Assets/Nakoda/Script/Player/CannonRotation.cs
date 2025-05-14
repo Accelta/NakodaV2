@@ -254,6 +254,12 @@ public float GetCurrentVerticalAngle()
         GameObject bullet = BulletPool.Instance.GetBullet(firePoint.position, firePoint.rotation);
         bullet.SetActive(true);
 
+         Bullet bulletScript = bullet.GetComponent<Bullet>();
+    if (bulletScript != null)
+    {
+        bulletScript.SetDamage(bulletData.bulletDamage);
+    }
+
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         if (rb != null)
         {
