@@ -86,7 +86,7 @@ public abstract class AIShipBase : MonoBehaviour
         Move(avoidanceDir.normalized);
     }
 
-    private void ChooseNextWaypoint()
+    protected void ChooseNextWaypoint()
     {
         if (waypoints == null || waypoints.Count == 0) return;
 

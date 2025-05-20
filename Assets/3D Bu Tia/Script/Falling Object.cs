@@ -7,7 +7,8 @@ public class FallingObjectTst : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Caught!");
-            PointManagerTst.instance.AddScore(1); // Updated name here
+            // PointManagerTst.instance.AddScore(1); // Updated name here
+            ScoreManager.Instance.AddScore(10);
             Destroy(gameObject);
         }
         else if (other.CompareTag("Ground"))
