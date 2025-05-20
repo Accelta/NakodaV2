@@ -52,7 +52,7 @@ public class Health : MonoBehaviour
 
     if (CompareTag("Player"))
     {
-        ScreenFader fader = FindObjectOfType<ScreenFader>();
+        ScreenFader fader = FindFirstObjectByType<ScreenFader>();
         if (fader != null)
         {
             fader.FadeAndRestart();
