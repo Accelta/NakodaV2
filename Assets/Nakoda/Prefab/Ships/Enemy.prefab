@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3339130685858044811}
   - component: {fileID: 779596368512361966}
   - component: {fileID: 6692101960824022997}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9010324533121916903}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 3559253499066561996}
   - component: {fileID: 906915875819027020}
   - component: {fileID: 159622212368990673}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tiang1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +216,7 @@ GameObject:
   - component: {fileID: 676653311927434103}
   - component: {fileID: 8996980435468934513}
   - component: {fileID: 3247704079553491569}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -302,7 +302,7 @@ GameObject:
   - component: {fileID: 1084833356192032342}
   - component: {fileID: 5192942630241838015}
   - component: {fileID: 8155007118723358497}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -387,7 +387,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7896847468322553105}
   - component: {fileID: 4447345149291106943}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: FrontCameraGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -441,7 +441,7 @@ GameObject:
   - component: {fileID: 4365119601003750250}
   - component: {fileID: 913985092012842751}
   - component: {fileID: 6866897075251691825}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -625,7 +625,7 @@ GameObject:
   - component: {fileID: 4792342729011946558}
   - component: {fileID: 3035025434147120887}
   - component: {fileID: 1928170885509719366}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -709,7 +709,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8133578624779542061}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Floater (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -740,7 +740,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 749788079834010237}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -774,7 +774,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6516411913008595318}
   - component: {fileID: 285897315441418091}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: CannonCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -850,7 +850,7 @@ GameObject:
   - component: {fileID: 8055228808711101201}
   - component: {fileID: 2344753979816608951}
   - component: {fileID: 8363487168023175556}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -936,7 +936,7 @@ GameObject:
   - component: {fileID: 7356473713371581919}
   - component: {fileID: 6799128314691296299}
   - component: {fileID: 1638612075477274621}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1021,7 +1021,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5539445334167622465}
   - component: {fileID: 2290230109009562599}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: CannonCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1095,7 +1095,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 386011157520008506}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: CameraVIewPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1126,7 +1126,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6348301450262077149}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1162,7 +1162,7 @@ GameObject:
   - component: {fileID: 9218949798808720476}
   - component: {fileID: 5689618139489286811}
   - component: {fileID: 8224317468045724357}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tiang3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1247,7 +1247,7 @@ GameObject:
   m_Component:
   - component: {fileID: 596973033526460016}
   - component: {fileID: 7518073792701525680}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Layar2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1337,7 +1337,7 @@ GameObject:
   - component: {fileID: 42242101283534367}
   - component: {fileID: 6535863867896284716}
   - component: {fileID: 213194452928796598}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: pinggiranDepan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1422,7 +1422,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4910868855402759920}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Kapal-besar-coloring-test6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1464,7 +1464,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7315148450133682134}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Floater (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1496,7 +1496,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6728556784017735302}
   - component: {fileID: 8720783802570994636}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Main Gun Platform (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1541,15 +1541,15 @@ MonoBehaviour:
   minVerticalRotation: -30
   maxVerticalRotation: 10
   cannonSide: 1
-  minHorizontalAngle: -120
-  maxHorizontalAngle: 120
+  minHorizontalAngle: -30
+  maxHorizontalAngle: -150
   detectionRange: 100
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 64
   shootingAudio: {fileID: 2163161690421925074}
   isRotationActive: 0
-  autoMode: 0
+  autoMode: 1
   aimThreshold: 5
   returnDelay: 3
   defaultMainRotation: {x: 0, y: 0, z: 0}
@@ -1566,7 +1566,7 @@ GameObject:
   - component: {fileID: 7648800641971810778}
   - component: {fileID: 2647279483284767335}
   - component: {fileID: 4846759111066030248}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1751,7 +1751,7 @@ GameObject:
   - component: {fileID: 9142589464221657983}
   - component: {fileID: 5849763232066277884}
   - component: {fileID: 9034515898148627031}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: RightCannonGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1849,7 +1849,7 @@ GameObject:
   - component: {fileID: 8477949063400785150}
   - component: {fileID: 8231231960109075116}
   - component: {fileID: 2163161690421925074}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2031,7 +2031,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5271653643532145565}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2062,7 +2062,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1455782290489497529}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2102,9 +2102,11 @@ GameObject:
   - component: {fileID: 4045972180759066432}
   - component: {fileID: 7331275958174561699}
   - component: {fileID: 3172314784619895306}
-  m_Layer: 6
-  m_Name: PlayerShip
-  m_TagString: Player
+  - component: {fileID: 2182709048485861166}
+  - component: {fileID: 2447919762125153635}
+  m_Layer: 7
+  m_Name: Enemy
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2118,7 +2120,7 @@ Transform:
   m_GameObject: {fileID: 4477557821618875988}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.8940067, y: 4.5850005, z: 2.063815}
+  m_LocalPosition: {x: -189.106, y: 4.585001, z: 23.063843}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2194,7 +2196,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4477557821618875988}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 370744a819548ab46b7fd575e3548190, type: 3}
   m_Name: 
@@ -2213,7 +2215,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4477557821618875988}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: daeae75818e60fc4aa9e3d7ba0ce343e, type: 3}
   m_Name: 
@@ -2243,8 +2245,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 3.900188, z: 7.9216156}
-  m_Center: {x: 0.000000005698967, y: 1.4500879, z: 3.4607906}
+  m_Size: {x: 1, y: 3.900188, z: 8.92157}
+  m_Center: {x: 0, y: 2.4500878, z: -1.0392151}
 --- !u!114 &7331275958174561699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2258,7 +2260,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  isPlayer: 1
+  isPlayer: 0
+  destructionDelay: 10
+  explosionVFX: {fileID: 0}
+  toBeDestroyedList:
+  - {fileID: 8110891327646082794}
+  - {fileID: 3001095340607831311}
+  - {fileID: 4477557821618875988}
+  - {fileID: 5826664961549677579}
+  - {fileID: 6074349046716210248}
+  - {fileID: 3010170384041546726}
+  - {fileID: 6671131628709648552}
+  - {fileID: 5975053277086917410}
 --- !u!114 &3172314784619895306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2273,7 +2286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleMode: 1
   regionSize: {x: 5, y: 10}
-  amplitude: 2
+  amplitude: 1
   surfaceFoamDimmer: 1
   deepFoamDimmer: 1
   resolution: {x: 256, y: 256}
@@ -2282,6 +2295,34 @@ MonoBehaviour:
   type: 3
   texture: {fileID: 0}
   m_Version: 2
+--- !u!114 &2182709048485861166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4477557821618875988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b48369af715bbfd4691bd09cec0277b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyTag: Player
+--- !u!114 &2447919762125153635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4477557821618875988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7324a27d962625041bc6312216c69bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectionRange: 500
+  engageRange: 100
+  playerPrefab: {fileID: 0}
 --- !u!1 &4574453860573442700
 GameObject:
   m_ObjectHideFlags: 0
@@ -2291,7 +2332,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4759166902089680974}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2322,7 +2363,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2756817028842441768}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Floater (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2355,7 +2396,7 @@ GameObject:
   - component: {fileID: 8476322658868629929}
   - component: {fileID: 1923344334545642185}
   - component: {fileID: 1987716896010206206}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: cagakDepan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2441,7 +2482,7 @@ GameObject:
   - component: {fileID: 4089862622765778978}
   - component: {fileID: 1946170658277429514}
   - component: {fileID: 3342582116188842575}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tiang2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2527,7 +2568,7 @@ GameObject:
   - component: {fileID: 7372788314625291741}
   - component: {fileID: 2389063618084266134}
   - component: {fileID: 16805961947784169}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bowsprit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2612,8 +2653,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4435721840504315157}
   - component: {fileID: 187938398480244430}
-  - component: {fileID: 187907285306960605}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Main Gun Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2663,32 +2703,14 @@ MonoBehaviour:
   detectionRange: 100
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 64
   shootingAudio: {fileID: 5819970291296880374}
   isRotationActive: 0
-  autoMode: 0
+  autoMode: 1
   aimThreshold: 5
   returnDelay: 3
-  defaultMainRotation: {x: 0, y: 180, z: 0}
+  defaultMainRotation: {x: 0, y: 0, z: 0}
   defaultBarrelRotation: {x: 0, y: 0, z: 0}
---- !u!1818360609 &187907285306960605
-RotationConstraint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5826664961549677579}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Weight: 1
-  m_RotationAtRest: {x: 0, y: 0, z: 0}
-  m_RotationOffset: {x: 0, y: 0, z: 0}
-  m_AffectRotationX: 1
-  m_AffectRotationY: 1
-  m_AffectRotationZ: 1
-  m_Active: 0
-  m_IsLocked: 1
-  m_Sources: []
 --- !u!1 &5975053277086917410
 GameObject:
   m_ObjectHideFlags: 0
@@ -2699,7 +2721,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7500057301182696415}
   - component: {fileID: 8020842037901371950}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Main Gun Platform (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2749,10 +2771,10 @@ MonoBehaviour:
   detectionRange: 100
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 64
   shootingAudio: {fileID: 6866897075251691825}
   isRotationActive: 0
-  autoMode: 0
+  autoMode: 1
   aimThreshold: 5
   returnDelay: 3
   defaultMainRotation: {x: 0, y: 0, z: 0}
@@ -2767,7 +2789,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7870567261471830322}
   - component: {fileID: 6899952453940476767}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Main Gun Platform (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2812,15 +2834,15 @@ MonoBehaviour:
   minVerticalRotation: -30
   maxVerticalRotation: 10
   cannonSide: 1
-  minHorizontalAngle: -120
-  maxHorizontalAngle: 120
+  minHorizontalAngle: -150
+  maxHorizontalAngle: -30
   detectionRange: 100
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 64
   shootingAudio: {fileID: 4846759111066030248}
   isRotationActive: 0
-  autoMode: 0
+  autoMode: 1
   aimThreshold: 5
   returnDelay: 3
   defaultMainRotation: {x: 0, y: 0, z: 0}
@@ -2835,7 +2857,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5795320547694184475}
   - component: {fileID: 3805406689271841489}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Main Gun Platform (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2885,10 +2907,10 @@ MonoBehaviour:
   detectionRange: 100
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 64
   shootingAudio: {fileID: 3695985843415465853}
   isRotationActive: 0
-  autoMode: 0
+  autoMode: 1
   aimThreshold: 5
   returnDelay: 3
   defaultMainRotation: {x: 0, y: 0, z: 0}
@@ -2904,7 +2926,7 @@ GameObject:
   - component: {fileID: 6463708576506298743}
   - component: {fileID: 945204224669223551}
   - component: {fileID: 5172815921133371227}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: pinggiranTengah
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2991,7 +3013,7 @@ GameObject:
   - component: {fileID: 6415898041606024337}
   - component: {fileID: 8615891838665105731}
   - component: {fileID: 7279512129779254307}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BodyUtama
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3076,7 +3098,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5357776494670262959}
   - component: {fileID: 3233566636455488488}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: CannonCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3150,7 +3172,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6945512860966263347}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3181,7 +3203,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4369987992541981735}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3215,7 +3237,7 @@ GameObject:
   - component: {fileID: 157477307317439092}
   - component: {fileID: 4552204850088800079}
   - component: {fileID: 3695985843415465853}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3399,7 +3421,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1956918304443185331}
   - component: {fileID: 8492821052039765921}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Layar1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3489,7 +3511,7 @@ GameObject:
   - component: {fileID: 7914399533910117595}
   - component: {fileID: 4293445859231272526}
   - component: {fileID: 2633783986989189322}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: pinggiranBelakang
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3574,7 +3596,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6983032145457573190}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Floater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3608,7 +3630,7 @@ GameObject:
   - component: {fileID: 3692698660776532825}
   - component: {fileID: 7781247752339372924}
   - component: {fileID: 5819970291296880374}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3792,7 +3814,7 @@ GameObject:
   - component: {fileID: 6340685882022908775}
   - component: {fileID: 6187090082596484330}
   - component: {fileID: 7240872380653636754}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: LeftCannonGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3888,7 +3910,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8205113818821920134}
   - component: {fileID: 4080782234698325225}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: CannonCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3962,7 +3984,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7243889552634997054}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3993,7 +4015,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7838238620145507175}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4029,7 +4051,7 @@ GameObject:
   - component: {fileID: 36776352251472851}
   - component: {fileID: 6452439447014513964}
   - component: {fileID: 264794865299625427}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4115,7 +4137,7 @@ GameObject:
   - component: {fileID: 465539451902503350}
   - component: {fileID: 2957680943841454453}
   - component: {fileID: 5272888819785292155}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4200,7 +4222,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4570493838050959069}
   - component: {fileID: 3576299129622095558}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Layar3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -1,5 +1,7 @@
 using UnityEngine;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Health : MonoBehaviour
 {
@@ -7,9 +9,13 @@ public class Health : MonoBehaviour
     private float currentHealth;
 
     public event Action OnDeath;
-    public event Action<float, float> OnHealthChanged; // 👈 Add this line
+    public event Action<float, float> OnHealthChanged;
 
     public bool isPlayer = false;
+
+    [SerializeField] private float destructionDelay = 10f;
+    [SerializeField] private GameObject explosionVFX;
+    [SerializeField] private List<GameObject> toBeDestroyedList = new List<GameObject>();
 
     void Start()
     {
@@ -21,48 +27,91 @@ public class Health : MonoBehaviour
     {
         maxHealth = healthAmount;
         currentHealth = maxHealth;
-        OnHealthChanged?.Invoke(currentHealth, maxHealth); // 👈 Optional initial update
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
     }
 
     public void TakeDamage(float damageAmount)
     {
         currentHealth -= damageAmount;
-        currentHealth = Mathf.Max(currentHealth, 0f); // Clamp to 0
+        currentHealth = Mathf.Max(currentHealth, 0f);
 
         Debug.Log($"{gameObject.name} hit!");
-        Debug.Log($"Taking damage: {damageAmount}"); // 👈 Add this
+        Debug.Log($"Taking damage: {damageAmount}");
 
-        OnHealthChanged?.Invoke(currentHealth, maxHealth); // ✅ Fire the event here
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
 
         if (currentHealth <= 0f)
         {
             Die();
-        }
-        else if (currentHealth <= 0f && gameObject.CompareTag("Ship"))
-        {
-            PauseGame();
+
+           
         }
     }
 
- void Die()
-{
-    Debug.Log($"{gameObject.name} died!");
-    OnHealthChanged?.Invoke(0f, maxHealth);
-    OnDeath?.Invoke();
-
-    if (CompareTag("Player"))
+    void Die()
     {
-        ScreenFader fader = FindFirstObjectByType<ScreenFader>();
-        if (fader != null)
+        Debug.Log($"{gameObject.name} died!");
+        OnHealthChanged?.Invoke(0f, maxHealth);
+        OnDeath?.Invoke();
+        
+        // Disable cannon if exists
+            CannonRotation cannon = GetComponent<CannonRotation>();
+                if (cannon != null)
+                {
+                    cannon.enabled = false;
+                    Debug.Log($"{gameObject.name}'s CannonRotation disabled on death.");
+                }
+
+        if (CompareTag("Player"))
         {
-            fader.FadeAndRestart();
+            ScreenFader fader = FindFirstObjectByType<ScreenFader>();
+            if (fader != null)
+            {
+                fader.FadeAndRestart();
+            }
+        }
+        else
+        {
+
+
+            if (!toBeDestroyedList.Contains(gameObject))
+                toBeDestroyedList.Add(gameObject);
+
+            BoatBuoyancy buoyancy = GetComponent<BoatBuoyancy>();
+            if (buoyancy != null)
+            {
+                buoyancy.buoyancyStrength = 0.5f;
+                buoyancy.dragInWater = 5f;
+
+                int total = buoyancy.floatPoints.Length;
+                if (total >= 2)
+                {
+                    buoyancy.floatPoints[total - 1].gameObject.SetActive(false);
+                    buoyancy.floatPoints[total - 2].gameObject.SetActive(false);
+                }
+            }
+
+            StartCoroutine(DelayedDestruction());
         }
     }
-    else
+
+    IEnumerator DelayedDestruction()
     {
-        Destroy(gameObject);
+        yield return new WaitForSeconds(destructionDelay);
+
+        foreach (var obj in toBeDestroyedList)
+        {
+            if (obj != null)
+            {
+                if (explosionVFX != null)
+                    Instantiate(explosionVFX, obj.transform.position, Quaternion.identity);
+
+                Destroy(obj);
+            }
+        }
+
+        toBeDestroyedList.Clear();
     }
-}
 
     void PauseGame()
     {

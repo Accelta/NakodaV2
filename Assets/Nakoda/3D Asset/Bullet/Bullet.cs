@@ -4,7 +4,7 @@ public class Bullet : MonoBehaviour
 {
     private float damage;
     public float lifetime = 5f;
-    public GameObject impactEffectPrefab;
+    public GameObject impactVFXPrefab; // ✅ Changed to GameObject
 
     private TrailRenderer trailRenderer;
     private ParticleSystem trailParticle;
@@ -23,6 +23,7 @@ public class Bullet : MonoBehaviour
         if (trailParticle != null)
             trailParticle.Play();
 
+        CancelInvoke();
         Invoke(nameof(DeactivateBullet), lifetime);
     }
 
@@ -43,10 +44,11 @@ public class Bullet : MonoBehaviour
             targetHealth.TakeDamage(damage);
         }
 
-        if (impactEffectPrefab != null)
+        // ✅ Instantiate the VFX prefab (as GameObject)
+        if (impactVFXPrefab != null)
         {
-            GameObject effect = Instantiate(impactEffectPrefab, transform.position, Quaternion.identity);
-            Destroy(effect, 1f);
+            GameObject vfxInstance = Instantiate(impactVFXPrefab, transform.position, Quaternion.identity);
+            Destroy(vfxInstance, 2f); // clean up after effect plays
         }
 
         gameObject.SetActive(false);
