@@ -138,7 +138,7 @@ if (target == null)
         Quaternion desiredHoriz = Quaternion.LookRotation(flatDir);
         mainBody.localRotation = Quaternion.RotateTowards(
         mainBody.localRotation,
-        Quaternion.Euler(defaultMainRotation),
+        desiredHoriz,
         rotationSpeed * Time.deltaTime
 );
     }
