@@ -2731,7 +2731,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chargeTime: 1
   cooldownTime: 20
-  bulletData: {fileID: 11400000, guid: 72401adc7f948c54ea8f2c0d24d49f0c, type: 2}
+  bulletData: {fileID: 11400000, guid: 6a10c09df15e7a34d88f87012b670b45, type: 2}
   firePoint: {fileID: 47591284}
   muzzleFlashPrefab: {fileID: 8474759513659773041, guid: f0bf66cf60701e346818e43f66c7ebed, type: 3}
 --- !u!1001 &862030317
@@ -3303,7 +3303,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chargeTime: 1
   cooldownTime: 20
-  bulletData: {fileID: 11400000, guid: 72401adc7f948c54ea8f2c0d24d49f0c, type: 2}
+  bulletData: {fileID: 11400000, guid: 6a10c09df15e7a34d88f87012b670b45, type: 2}
   firePoint: {fileID: 1394520923}
   muzzleFlashPrefab: {fileID: 8474759513659773041, guid: f0bf66cf60701e346818e43f66c7ebed, type: 3}
 --- !u!65 &1035600744
@@ -3837,6 +3837,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   isPlayer: 0
+  destructionDelay: 10
+  explosionVFX: {fileID: 0}
+  toBeDestroyedList: []
 --- !u!1 &1133600286
 GameObject:
   m_ObjectHideFlags: 0
@@ -7318,6 +7321,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   isPlayer: 1
+  destructionDelay: 10
+  explosionVFX: {fileID: 0}
+  toBeDestroyedList: []
 --- !u!1 &7665435712174529653
 GameObject:
   m_ObjectHideFlags: 0
