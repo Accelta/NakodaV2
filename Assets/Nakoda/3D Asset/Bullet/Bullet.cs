@@ -4,7 +4,8 @@ public class Bullet : MonoBehaviour
 {
     private float damage;
     public float lifetime = 5f;
-    public GameObject impactVFXPrefab; // ✅ Changed to GameObject
+    public GameObject impactVFXPrefab;
+    public bool addScoreOnHit = false; // <-- Add this flag
 
     private TrailRenderer trailRenderer;
     private ParticleSystem trailParticle;
@@ -44,13 +45,17 @@ public class Bullet : MonoBehaviour
             targetHealth.TakeDamage(damage);
         }
 
-        // ✅ Instantiate the VFX prefab (as GameObject)
         if (impactVFXPrefab != null)
         {
             GameObject vfxInstance = Instantiate(impactVFXPrefab, transform.position, Quaternion.identity);
-            Destroy(vfxInstance, 2f); // clean up after effect plays
+            Destroy(vfxInstance, 2f);
         }
 
+        // Only add score if enabled
+        if (addScoreOnHit && other.CompareTag("Enemy"))
+        {
+            ScoreManager.Instance.AddScore(15);
+        }
         gameObject.SetActive(false);
     }
 }

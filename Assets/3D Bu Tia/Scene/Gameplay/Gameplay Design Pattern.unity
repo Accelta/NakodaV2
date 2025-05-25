@@ -2260,7 +2260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 1769183188}
-  bulletData: {fileID: 11400000, guid: 72401adc7f948c54ea8f2c0d24d49f0c, type: 2}
+  bulletData: {fileID: 11400000, guid: 6a10c09df15e7a34d88f87012b670b45, type: 2}
   minFireDelay: 14
   maxFireDelay: 14
   muzzleFlashPrefab: {fileID: 4193711773648892774, guid: 76e1935ca75804149ac2c9f949aeb23a, type: 3}
@@ -5320,7 +5320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 1016672313}
-  bulletData: {fileID: 11400000, guid: 72401adc7f948c54ea8f2c0d24d49f0c, type: 2}
+  bulletData: {fileID: 11400000, guid: 6a10c09df15e7a34d88f87012b670b45, type: 2}
   minFireDelay: 9
   maxFireDelay: 9
   muzzleFlashPrefab: {fileID: 4193711773648892774, guid: 76e1935ca75804149ac2c9f949aeb23a, type: 3}
@@ -6115,7 +6115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 26034958}
-  bulletData: {fileID: 11400000, guid: 72401adc7f948c54ea8f2c0d24d49f0c, type: 2}
+  bulletData: {fileID: 11400000, guid: 6a10c09df15e7a34d88f87012b670b45, type: 2}
   minFireDelay: 5
   maxFireDelay: 5
   muzzleFlashPrefab: {fileID: 4193711773648892774, guid: 76e1935ca75804149ac2c9f949aeb23a, type: 3}

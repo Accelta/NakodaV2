@@ -54,7 +54,7 @@ public class CannonRotation : MonoBehaviour
         currentHorizontalRotation = mainBody.localEulerAngles.y;
         currentVerticalRotation = barrel.localEulerAngles.x;
 
-        if (bulletData == null || bulletData.bulletPrefab == null)
+        if (bulletData == null )
             Debug.LogError("BulletData or Bullet Prefab is not assigned!");
 
         if (shootingAudio == null)
@@ -249,7 +249,7 @@ public float GetCurrentVerticalAngle()
 
     public void FireBullet()
     {
-        if (bulletData == null || bulletData.bulletPrefab == null) return;
+        if (bulletData == null ) return;
 
         GameObject bullet = BulletPool.Instance.GetBullet(firePoint.position, firePoint.rotation);
         bullet.SetActive(true);

@@ -130,7 +130,7 @@ public class PlayerCannonMinigame : MonoBehaviour
 
     void FireBullet()
     {
-        if (bulletData == null || bulletData.bulletPrefab == null || firePoint == null) return;
+        if (bulletData == null || firePoint == null) return;
 
         // Use BulletPool to get a bullet
         GameObject bullet = BulletPool.Instance.GetBullet(firePoint.position, firePoint.rotation);

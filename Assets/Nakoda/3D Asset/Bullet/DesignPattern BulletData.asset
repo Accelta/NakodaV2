@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 250581262d1ab314abcef19216eb017a, type: 3}
   m_Name: DesignPattern BulletData
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 6906012453617094224, guid: 4a1c07ddc9e75f24085ef5498477cade, type: 3}
   bulletForce: 250
-  bulletDamage: 20
+  bulletDamage: 25
   gravity: 9.81
