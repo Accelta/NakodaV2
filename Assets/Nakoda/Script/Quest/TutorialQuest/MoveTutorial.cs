@@ -3,18 +3,20 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "MoveToObjective", menuName = "Quests/Move Tutorial")]
 public class MoveTutorial : QuestObjective
 {
-     public string triggerTag = "QuestTrigger";  // Tag for the trigger in the scene
+    public string triggerTag = "QuestTrigger";
+    private CompassTarget currentTarget; // Reference to the marker added
 
     public override void StartObjective()
     {
         Debug.Log($"Objective Started: Move to the area marked by {triggerTag}");
-        GameObject triggerobject = GameObject.FindWithTag(triggerTag);
-        if (triggerobject != null)
+
+        GameObject triggerObject = GameObject.FindWithTag(triggerTag);
+        if (triggerObject != null)
         {
-            var compasstarget = triggerobject.GetComponent<CompassTarget>();
-            if (compasstarget != null)
+            currentTarget = triggerObject.GetComponent<CompassTarget>();
+            if (currentTarget != null)
             {
-                CompassManager.Instance?.AddMarker(compasstarget);
+                CompassManager.Instance?.AddMarker(currentTarget);
             }
         }
         else
@@ -25,11 +27,16 @@ public class MoveTutorial : QuestObjective
 
     public override void CheckObjectiveCompletion()
     {
-        // Completion is now handled by the trigger in the scene
+        // Handled externally
     }
 
     public void OnPlayerEnterTrigger()
     {
         CompleteObjective();
+
+        if (currentTarget != null)
+        {
+            CompassManager.Instance?.RemoveMarker(currentTarget);
+        }
     }
 }
