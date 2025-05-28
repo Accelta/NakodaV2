@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 374bec1f314459e4dba42f3d295c64be, type: 3}
   m_Name: MoveToObjective
   m_EditorClassIdentifier: 
-  objectiveDescription: 
+  objectiveDescription: GotoDestination
   triggerTag: QuestTrigger

@@ -15,6 +15,5 @@ MonoBehaviour:
   questName: Tutorial
   objectives:
   - {fileID: 11400000, guid: 65be7d91270a4d5469b4b7e7ed7ecb9b, type: 2}
-  - {fileID: 11400000, guid: 03a380d1b55e74b45bcf66408b86f95c, type: 2}
   requiredQuest: {fileID: 0}
   questDescription: Belajar berjalan dan menembak

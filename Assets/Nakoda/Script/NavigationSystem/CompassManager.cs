@@ -34,11 +34,11 @@ public class CompassManager : MonoBehaviour
     {
         degreesPerPixel = 360f / compassWidth;
 
-        CompassTarget[] targets = FindObjectsByType<CompassTarget>(FindObjectsSortMode.None);
-        foreach (var target in targets)
-        {
-            AddMarker(target);
-        }
+        // CompassTarget[] targets = FindObjectsByType<CompassTarget>(FindObjectsSortMode.None);
+        // foreach (var target in targets)
+        // {
+        //     AddMarker(target);
+        // }
     }
 
     void Update()
@@ -87,7 +87,8 @@ public class CompassManager : MonoBehaviour
         {
             markers.Remove(marker);
             Destroy(marker.icon.gameObject);
+            Debug.Log($"Marker for {target.name} removed from compass.");
         }
-        Debug.Log($"Marker for {target.name} removed from compass.");
+        
     }
 }
