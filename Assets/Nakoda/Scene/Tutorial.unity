@@ -4038,11 +4038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9384eed7a6d03e64e973ec18668d54e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allQuests:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  allQuests: []
   activeQuests: []
   barriers: []
 --- !u!4 &768546067

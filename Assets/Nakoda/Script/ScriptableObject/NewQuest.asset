@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd98360daa80b8147989cd2a5d33a59a, type: 3}
   m_Name: NewQuest
   m_EditorClassIdentifier: 
-  questName: 
-  objectives: []
+  questName: Go to the designated Marker
+  objectives:
+  - {fileID: 0}
   requiredQuest: {fileID: 0}
   questDescription: 
