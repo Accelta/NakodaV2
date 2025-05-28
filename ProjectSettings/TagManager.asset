@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - Obstacle
   - Shield
+  - QuestTrigger1
   layers:
   - Default
   - TransparentFX

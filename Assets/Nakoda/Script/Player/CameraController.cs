@@ -150,7 +150,7 @@ public class CameraController : MonoBehaviour
 
     void HandleCameraSwitch()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetMouseButtonDown(1))
         {
             if (!isUsingCannon)
             {
