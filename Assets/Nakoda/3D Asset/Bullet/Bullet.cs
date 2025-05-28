@@ -4,7 +4,9 @@ public class Bullet : MonoBehaviour
 {
     private float damage;
     public float lifetime = 5f;
-    public GameObject impactVFXPrefab; // ✅ Changed to GameObject
+    public GameObject impactVFXPrefab;
+    public bool addScoreOnHit = false; // <-- Add this flag
+    public int scoreBullet;
 
     private TrailRenderer trailRenderer;
     private ParticleSystem trailParticle;
@@ -14,12 +16,6 @@ public class Bullet : MonoBehaviour
         trailRenderer = GetComponent<TrailRenderer>();
         trailParticle = GetComponentInChildren<ParticleSystem>();
     }
-
-    public void Initialize(float damageAmount, GameObject impactVFX)
-{
-    damage = damageAmount;
-    impactVFXPrefab = impactVFX;
-}
 
     void OnEnable()
     {
@@ -43,25 +39,24 @@ public class Bullet : MonoBehaviour
         damage = damageAmount;
     }
 
- void OnTriggerEnter(Collider other)
-{
-    if (other.TryGetComponent<Health>(out Health targetHealth))
+    void OnTriggerEnter(Collider other)
     {
-        targetHealth.TakeDamage(damage);
-    }
+        if (other.TryGetComponent<Health>(out Health targetHealth))
+        {
+            targetHealth.TakeDamage(damage);
+        }
 
-    if (impactVFXPrefab != null)
-    {
-        Debug.Log("Instantiating VFX at " + transform.position);
-        GameObject vfxInstance = Instantiate(impactVFXPrefab, transform.position, Quaternion.identity);
-        Destroy(vfxInstance, 5f);
-    }
-    else
-    {
-        Debug.LogWarning("No impact VFX prefab assigned!");
-    }
+        if (impactVFXPrefab != null)
+        {
+            GameObject vfxInstance = Instantiate(impactVFXPrefab, transform.position, Quaternion.identity);
+            Destroy(vfxInstance, 2f);
+        }
 
-    gameObject.SetActive(false);
-}
-
+        // Only add score if enabled
+        if (addScoreOnHit && other.CompareTag("Enemy"))
+        {
+            ScoreManager.Instance.AddScore(scoreBullet);
+        }
+        gameObject.SetActive(false);
+    }
 }

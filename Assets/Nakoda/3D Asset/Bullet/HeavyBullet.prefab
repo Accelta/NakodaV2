@@ -152,6 +152,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifetime: 12
   impactVFXPrefab: {fileID: 1440544050547825468, guid: 14f9fcbb24a767f49aa86fc4c0f7ff86, type: 3}
+  addScoreOnHit: 1
+  scoreBullet: 25
 --- !u!96 &-2906782741408171045
 TrailRenderer:
   serializedVersion: 3
