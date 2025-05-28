@@ -8,6 +8,19 @@ public class MoveTutorial : QuestObjective
     public override void StartObjective()
     {
         Debug.Log($"Objective Started: Move to the area marked by {triggerTag}");
+        GameObject triggerobject = GameObject.FindWithTag(triggerTag);
+        if (triggerobject != null)
+        {
+            var compasstarget = triggerobject.GetComponent<CompassTarget>();
+            if (compasstarget != null)
+            {
+                CompassManager.Instance?.AddMarker(compasstarget);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Trigger object not found for compass registration.");
+        }
     }
 
     public override void CheckObjectiveCompletion()

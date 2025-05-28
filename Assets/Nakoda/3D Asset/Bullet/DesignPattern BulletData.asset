@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: DesignPattern BulletData
   m_EditorClassIdentifier: 
   bulletForce: 250
-  bulletDamage: 25
+  bulletDamage: 10
   gravity: 9.81

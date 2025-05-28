@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
     public float lifetime = 5f;
     public GameObject impactVFXPrefab;
     public bool addScoreOnHit = false; // <-- Add this flag
+    public int scoreBullet;
 
     private TrailRenderer trailRenderer;
     private ParticleSystem trailParticle;
@@ -54,7 +55,7 @@ public class Bullet : MonoBehaviour
         // Only add score if enabled
         if (addScoreOnHit && other.CompareTag("Enemy"))
         {
-            ScoreManager.Instance.AddScore(15);
+            ScoreManager.Instance.AddScore(scoreBullet);
         }
         gameObject.SetActive(false);
     }
