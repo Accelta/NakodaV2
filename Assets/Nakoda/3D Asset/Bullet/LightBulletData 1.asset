@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 250581262d1ab314abcef19216eb017a, type: 3}
   m_Name: LightBulletData 1
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 6906012453617094224, guid: db17375964420e34ea8d09c351c2d625, type: 3}
-  bulletForce: 1000
+  bulletForce: 500
   bulletDamage: 5
   gravity: 11.85
