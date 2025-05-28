@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +21,7 @@ public class CompassManager : MonoBehaviour
     {
         public CompassTarget target;
         public Image icon;
+        public TextMeshProUGUI distanceText;
     }
 
     private void Awake()
@@ -51,6 +53,12 @@ public class CompassManager : MonoBehaviour
 
             marker.icon.rectTransform.anchoredPosition = new Vector2(posX, 0);
             marker.icon.enabled = distance < maxMarkerDistance;
+
+            if (marker.distanceText != null)
+            {
+                float dist = Vector3.Distance(player.position, marker.target.transform.position);
+                marker.distanceText.text = $"{Mathf.RoundToInt(dist)}m";
+            }
         }
     }
 
@@ -63,10 +71,23 @@ public class CompassManager : MonoBehaviour
         icon.sprite = target.markerData.icon;
         icon.color = target.markerData.iconColor;
 
+        TextMeshProUGUI distanceText = iconObj.GetComponentInChildren<TextMeshProUGUI>();
+
         markers.Add(new CompassElement
         {
             target = target,
-            icon = icon
+            icon = icon,
+            distanceText = distanceText
         });
+    }
+    public void RemoveMarker(CompassTarget target)
+    {
+        CompassElement marker = markers.Find(m => m.target == target);
+        if (marker != null)
+        {
+            markers.Remove(marker);
+            Destroy(marker.icon.gameObject);
+        }
+        Debug.Log($"Marker for {target.name} removed from compass.");
     }
 }
