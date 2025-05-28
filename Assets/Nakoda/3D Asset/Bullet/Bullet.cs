@@ -15,6 +15,12 @@ public class Bullet : MonoBehaviour
         trailParticle = GetComponentInChildren<ParticleSystem>();
     }
 
+    public void Initialize(float damageAmount, GameObject impactVFX)
+{
+    damage = damageAmount;
+    impactVFXPrefab = impactVFX;
+}
+
     void OnEnable()
     {
         if (trailRenderer != null)
@@ -37,20 +43,25 @@ public class Bullet : MonoBehaviour
         damage = damageAmount;
     }
 
-    void OnTriggerEnter(Collider other)
+ void OnTriggerEnter(Collider other)
+{
+    if (other.TryGetComponent<Health>(out Health targetHealth))
     {
-        if (other.TryGetComponent<Health>(out Health targetHealth))
-        {
-            targetHealth.TakeDamage(damage);
-        }
-
-        // ✅ Instantiate the VFX prefab (as GameObject)
-        if (impactVFXPrefab != null)
-        {
-            GameObject vfxInstance = Instantiate(impactVFXPrefab, transform.position, Quaternion.identity);
-            Destroy(vfxInstance, 2f); // clean up after effect plays
-        }
-
-        gameObject.SetActive(false);
+        targetHealth.TakeDamage(damage);
     }
+
+    if (impactVFXPrefab != null)
+    {
+        Debug.Log("Instantiating VFX at " + transform.position);
+        GameObject vfxInstance = Instantiate(impactVFXPrefab, transform.position, Quaternion.identity);
+        Destroy(vfxInstance, 5f);
+    }
+    else
+    {
+        Debug.LogWarning("No impact VFX prefab assigned!");
+    }
+
+    gameObject.SetActive(false);
+}
+
 }

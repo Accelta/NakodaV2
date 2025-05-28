@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 250581262d1ab314abcef19216eb017a, type: 3}
-  m_Name: HeavyBulletData
+  m_Script: {fileID: 11500000, guid: cd98360daa80b8147989cd2a5d33a59a, type: 3}
+  m_Name: NewQuest
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 6906012453617094224, guid: fdda15e34646cfc4c926d925522049fb, type: 3}
-  bulletForce: 600
-  bulletDamage: 5
-  gravity: 11.85
+  questName: 
+  objectives: []
+  requiredQuest: {fileID: 0}
+  questDescription: 

@@ -2097,9 +2097,8 @@ GameObject:
   - component: {fileID: 3810395267117570720}
   - component: {fileID: 4287745591059896079}
   - component: {fileID: 8642710343000247616}
-  - component: {fileID: 2387832283780650187}
-  - component: {fileID: 7953601594077506499}
   - component: {fileID: 4045972180759066432}
+  - component: {fileID: 7504551260865562955}
   - component: {fileID: 7331275958174561699}
   - component: {fileID: 3172314784619895306}
   - component: {fileID: 2182709048485861166}
@@ -2189,43 +2188,6 @@ MonoBehaviour:
   buoyancyStrength: 3
   dragInWater: 1
   dragInAir: 0
---- !u!114 &2387832283780650187
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4477557821618875988}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 370744a819548ab46b7fd575e3548190, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxSpeed: 10
-  acceleration: 10
-  deceleration: 10
-  turnSpeed: 1
-  rudder: {fileID: 676653311927434103}
-  rudderTurnAngle: 30
-  rudderSmoothSpeed: 10
---- !u!114 &7953601594077506499
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4477557821618875988}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daeae75818e60fc4aa9e3d7ba0ce343e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shipVirtualCamera: {fileID: 0}
-  cannonGroups:
-  - {fileID: 4447345149291106943}
-  - {fileID: 9034515898148627031}
-  - {fileID: 7240872380653636754}
-  cannongrouptext: {fileID: 0}
 --- !u!65 &4045972180759066432
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2247,6 +2209,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 3.900188, z: 8.92157}
   m_Center: {x: 0, y: 2.4500878, z: -1.0392151}
+--- !u!114 &7504551260865562955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4477557821618875988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da010c2cb02b6d64f821779740aae041, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 10
+  acceleration: 3
+  deceleration: 2
+  turnSpeed: 2
+  stoppingDistance: 5
+  avoidanceDistance: 10
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  rayCount: 6
+  coneAngle: 60
+  visionRange: 20
+  sphereRadius: 1
+  showGizmos: 1
+  waypoints: []
+  showWaypoints: 1
+  waypointRadius: 0.5
+  detectionRadius: 40
+  loseTargetDelay: 5
 --- !u!114 &7331275958174561699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2262,7 +2255,7 @@ MonoBehaviour:
   maxHealth: 100
   isPlayer: 0
   destructionDelay: 10
-  explosionVFX: {fileID: 0}
+  explosionVFX: {fileID: 4193711773648892774, guid: 76e1935ca75804149ac2c9f949aeb23a, type: 3}
   toBeDestroyedList:
   - {fileID: 8110891327646082794}
   - {fileID: 3001095340607831311}
