@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class QuestObjective : ScriptableObject
 {
     public string objectiveDescription;
-    public bool isCompleted { get; private set; } = false;
+    public bool isCompleted = false;
 
     public abstract void StartObjective();
     public abstract void CheckObjectiveCompletion();
@@ -12,5 +12,11 @@ public abstract class QuestObjective : ScriptableObject
     {
         isCompleted = true;
         Debug.Log($"Objective Completed: {objectiveDescription}");
+        QuestManager.Instance?.UpdateObjectives();
+    }
+
+    public void ResetObjective()
+    {
+        isCompleted = false;
     }
 }

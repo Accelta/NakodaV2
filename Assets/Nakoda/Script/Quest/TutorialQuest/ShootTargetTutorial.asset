@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: ShootTargetTutorial
   m_EditorClassIdentifier: 
   objectiveDescription: TutorialShoot
+  isCompleted: 0
   targetTag: QuestTarget

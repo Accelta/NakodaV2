@@ -38,5 +38,6 @@ public class MoveTutorial : QuestObjective
         {
             CompassManager.Instance?.RemoveMarker(currentTarget);
         }
+        
     }
 }

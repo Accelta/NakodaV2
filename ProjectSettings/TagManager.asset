@@ -11,6 +11,8 @@ TagManager:
   - Obstacle
   - Shield
   - QuestTrigger1
+  - QuestTarget
+  - Bullet
   layers:
   - Default
   - TransparentFX
