@@ -27,4 +27,14 @@ public class QuestData : ScriptableObject
             objective.StartObjective();
         }
     }
+    // In QuestData
+public void ResetObjectives()
+{
+    foreach (var obj in objectives)
+    {
+        obj.ResetObjective();
+    }
+}
+
+
 }

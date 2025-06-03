@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: MoveToObjective
   m_EditorClassIdentifier: 
   objectiveDescription: AreaStep
-  targetPosition: {x: 15.75664, y: -0.23, z: 29.19602}
-  completionRadius: 100
+  isCompleted: 0
+  triggerTag: QuestTrigger

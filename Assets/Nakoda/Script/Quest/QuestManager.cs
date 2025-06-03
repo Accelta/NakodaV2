@@ -7,6 +7,7 @@ public class QuestManager : MonoBehaviour
 
     public List<QuestData> allQuests; // List of all quests in the game
     public List<QuestData> activeQuests = new List<QuestData>();
+    public List<QuestData> completedQuests = new List<QuestData>(); // <-- Add this line
     public List<GameObject> barriers; // Barriers that should be removed when certain quests are completed
 
     private void Awake()
@@ -20,27 +21,30 @@ public class QuestManager : MonoBehaviour
         CheckAvailableQuests();
     }
 
-public void CheckAvailableQuests()
-{
-    foreach (var quest in allQuests)
+    public void CheckAvailableQuests()
     {
-        if (!activeQuests.Contains(quest) && quest.CanStartQuest())
+        foreach (var quest in allQuests)
         {
-            activeQuests.Add(quest);
-            quest.StartQuest();  // 🔥 Now starts objectives when quest starts
+            if (!activeQuests.Contains(quest) && !completedQuests.Contains(quest) && quest.CanStartQuest())
+            {
+                activeQuests.Add(quest);
+                quest.StartQuest();
+            }
         }
     }
-}
 
     public void UpdateObjectives()
     {
-        foreach (var quest in activeQuests)
+        for (int i = activeQuests.Count - 1; i >= 0; i--)
         {
+            var quest = activeQuests[i];
             if (quest.IsQuestCompleted())
             {
                 Debug.Log($"Quest {quest.questName} Completed!");
                 UnlockNewQuests(quest);
                 RemoveBarriers(quest);
+                completedQuests.Add(quest); // <-- Add to completed list
+                activeQuests.RemoveAt(i);   // Optionally remove from active
             }
         }
     }
@@ -49,10 +53,11 @@ public void CheckAvailableQuests()
     {
         foreach (var quest in allQuests)
         {
-            if (!activeQuests.Contains(quest) && quest.requiredQuest == completedQuest)
+            if (!activeQuests.Contains(quest) && !completedQuests.Contains(quest) && quest.requiredQuest == completedQuest)
             {
                 activeQuests.Add(quest);
                 Debug.Log($"New Quest Unlocked: {quest.questName}");
+                quest.StartQuest();
             }
         }
     }
