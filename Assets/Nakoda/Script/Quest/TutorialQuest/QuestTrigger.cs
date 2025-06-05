@@ -8,7 +8,9 @@ public class QuestTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            #if UNITY_EDITOR
             Debug.Log("Player entered quest area!");
+            #endif
             linkedObjective.OnPlayerEnterTrigger();
         }
     }

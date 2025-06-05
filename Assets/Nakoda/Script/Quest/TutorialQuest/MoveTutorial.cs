@@ -8,7 +8,9 @@ public class MoveTutorial : QuestObjective
 
     public override void StartObjective()
     {
+        #if UNITY_EDITOR
         Debug.Log($"Objective Started: Move to the area marked by {triggerTag}");
+        #endif
 
         GameObject triggerObject = GameObject.FindWithTag(triggerTag);
         if (triggerObject != null)
@@ -21,7 +23,9 @@ public class MoveTutorial : QuestObjective
         }
         else
         {
+            #if UNITY_EDITOR
             Debug.LogWarning("Trigger object not found for compass registration.");
+            #endif
         }
     }
 

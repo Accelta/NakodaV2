@@ -40,7 +40,9 @@ public class QuestManager : MonoBehaviour
             var quest = activeQuests[i];
             if (quest.IsQuestCompleted())
             {
+                #if UNITY_EDITOR
                 Debug.Log($"Quest {quest.questName} Completed!");
+                #endif
                 UnlockNewQuests(quest);
                 RemoveBarriers(quest);
                 completedQuests.Add(quest); // <-- Add to completed list
@@ -56,7 +58,9 @@ public class QuestManager : MonoBehaviour
             if (!activeQuests.Contains(quest) && !completedQuests.Contains(quest) && quest.requiredQuest == completedQuest)
             {
                 activeQuests.Add(quest);
+                #if UNITY_EDITOR
                 Debug.Log($"New Quest Unlocked: {quest.questName}");
+                #endif
                 quest.StartQuest();
             }
         }
@@ -71,7 +75,9 @@ public class QuestManager : MonoBehaviour
             {
                 Destroy(barriers[i]);
                 barriers.RemoveAt(i);
+                #if UNITY_EDITOR
                 Debug.Log($"Barrier Removed: {barrier.gameObject.name}");
+                #endif
             }
         }
     }

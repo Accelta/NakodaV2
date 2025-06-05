@@ -21,7 +21,9 @@ public class QuestData : ScriptableObject
 
     public void StartQuest()
     {
+        #if UNITY_EDITOR
         Debug.Log($"Quest Started: {questName}");
+        #endif
         foreach (var objective in objectives)
         {
             objective.StartObjective();

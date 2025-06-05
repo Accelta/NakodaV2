@@ -53,12 +53,13 @@ public class CannonRotation : MonoBehaviour
     {
         currentHorizontalRotation = mainBody.localEulerAngles.y;
         currentVerticalRotation = barrel.localEulerAngles.x;
-
+        #if UNITY_EDITOR
         if (bulletData == null )
             Debug.LogError("BulletData or Bullet Prefab is not assigned!");
-
         if (shootingAudio == null)
             Debug.LogError("Shooting AudioSource is missing!");
+        #endif
+
     }
 
     void Update()

@@ -34,7 +34,9 @@ public class ShootTarget : QuestObjective
 
     public override void StartObjective()
     {
+        #if UNITY_EDITOR
         Debug.Log($"Objective Started: Fire at an object tagged '{targetTag}'");
+        #endif
 
         TryRegisterMarker(); // Coba langsung
 
@@ -54,7 +56,9 @@ public class ShootTarget : QuestObjective
             {
                 CompassManager.Instance?.AddMarker(currentTarget);
                 markerAdded = true;
+                #if UNITY_EDITOR
                 Debug.Log("Compass marker registered successfully.");
+                #endif
             }
         }
     }
@@ -73,7 +77,9 @@ public class ShootTarget : QuestObjective
 
         if (!markerAdded)
         {
-            Debug.LogWarning("Target marker not found within timeout.");
+        #if UNITY_EDITOR
+        Debug.LogWarning("Target marker not found within timeout.");
+        #endif
         }
     }
 

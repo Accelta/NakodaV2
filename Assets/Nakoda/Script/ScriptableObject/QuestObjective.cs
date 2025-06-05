@@ -11,7 +11,10 @@ public abstract class QuestObjective : ScriptableObject
     protected void CompleteObjective()
     {
         isCompleted = true;
+        
+        #if UNITY_EDITOR
         Debug.Log($"Objective Completed: {objectiveDescription}");
+        #endif
         QuestManager.Instance?.UpdateObjectives();
     }
 
