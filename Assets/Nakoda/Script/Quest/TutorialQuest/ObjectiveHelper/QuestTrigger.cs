@@ -1,17 +1,22 @@
 using UnityEngine;
 
-public class QuestTrigger : MonoBehaviour
+[RequireComponent(typeof(Collider))]
+public class MoveQuestTrigger : MonoBehaviour
 {
-    public MoveTutorial linkedObjective;
+    private MoveQuestObjective questObjective;
+    private string triggerTag;
+
+    public void Initialize(MoveQuestObjective objective, string tagToCheck)
+    {
+        questObjective = objective;
+        triggerTag = tagToCheck;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag(triggerTag) && questObjective != null)
         {
-            #if UNITY_EDITOR
-            Debug.Log("Player entered quest area!");
-            #endif
-            linkedObjective.OnPlayerEnterTrigger();
+            questObjective.OnPlayerReachDestination();
         }
     }
 }
