@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Nakoda/Script/Quest/TutorialQuest/Quest/DefeatEnemyQuest.asset.meta
-guid: de5773c563ce8c9449de09fccb1138d9
-========
-guid: 8a4a48288190c1641aa638a59d1e4ffa
->>>>>>>> 094f114b700555611926e100a327fb45757aeb19:Assets/Resources/DOTweenSettings.asset.meta
+guid: 93bdd592045b6974b88edc9ea5a7f9ba
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 11400000

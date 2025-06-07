@@ -9,20 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-<<<<<<<< HEAD:Assets/Nakoda/Script/Quest/TutorialQuest/Objectives/DefeatEnemiesObjectiveTutorial.asset
   m_Script: {fileID: 11500000, guid: 6625a2183a2a3104e950d0030f528679, type: 3}
   m_Name: DefeatEnemiesObjectiveTutorial
   m_EditorClassIdentifier: 
   objectiveDescription: 
   isCompleted: 0
   enemies: []
-========
-  m_Script: {fileID: 11500000, guid: 374bec1f314459e4dba42f3d295c64be, type: 3}
-  m_Name: MoveToObjective 2
-  m_EditorClassIdentifier: 
-  objectiveDescription: AreaStep
-  isCompleted: 1
-  destinationPrefab: {fileID: 8592439414799474914, guid: d02e200c325cdd84796860797d0ac10e, type: 3}
-  spawnPosition: {x: 0, y: 0, z: 0}
-  playerTag: Player
->>>>>>>> 094f114b700555611926e100a327fb45757aeb19:Assets/Nakoda/Script/Quest/List/MoveToObjective 2.asset

@@ -18,7 +18,6 @@ public class QuestManager : MonoBehaviour
 
     private void Start()
     {
-        ResetAllQuestObjectives();  // ✅ Reset state when the game starts
         CheckAvailableQuests();
     }
 
@@ -82,15 +81,4 @@ public class QuestManager : MonoBehaviour
             }
         }
     }
-
-    private void ResetAllQuestObjectives()
-{
-    foreach (var quest in allQuests)
-    {
-        foreach (var objective in quest.objectives)
-        {
-            objective.ResetObjective(); // This uses the ResetObjective() method you added to QuestObjective
-        }
-    }
-}
 }

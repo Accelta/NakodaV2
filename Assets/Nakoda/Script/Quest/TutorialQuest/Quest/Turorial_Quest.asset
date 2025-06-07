@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cd98360daa80b8147989cd2a5d33a59a, type: 3}
-  m_Name: Turorial_Quest 1
+  m_Name: Turorial_Quest
   m_EditorClassIdentifier: 
   questName: Tutorial
   objectives:
-  - {fileID: 11400000, guid: 0f221e53b6cd1d74e81983efff439e01, type: 2}
+  - {fileID: 11400000, guid: 65be7d91270a4d5469b4b7e7ed7ecb9b, type: 2}
   requiredQuest: {fileID: 0}
   questDescription: Belajar berjalan dan menembak

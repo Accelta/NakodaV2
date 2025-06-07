@@ -55,7 +55,7 @@ public class Bullet : MonoBehaviour
         // Only add score if enabled
         if (addScoreOnHit && other.CompareTag("Enemy"))
         {
-            // ScoreManager.Instance.AddScore(scoreBullet);
+            ScoreManager.Instance.AddScore(scoreBullet);
         }
         gameObject.SetActive(false);
     }
