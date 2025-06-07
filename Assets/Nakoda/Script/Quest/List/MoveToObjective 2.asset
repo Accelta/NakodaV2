@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 374bec1f314459e4dba42f3d295c64be, type: 3}
-  m_Name: Move2
+  m_Name: MoveToObjective 2
   m_EditorClassIdentifier: 
-  objectiveDescription: Gotodestination
-  isCompleted: 0
-  triggerTag: QuestTrigger1
+  objectiveDescription: AreaStep
+  isCompleted: 1
+  destinationPrefab: {fileID: 8592439414799474914, guid: d02e200c325cdd84796860797d0ac10e, type: 3}
+  spawnPosition: {x: 0, y: 0, z: 0}
+  playerTag: Player

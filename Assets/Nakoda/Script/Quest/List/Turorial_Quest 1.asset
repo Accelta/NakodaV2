@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 374bec1f314459e4dba42f3d295c64be, type: 3}
-  m_Name: MoveToObjective
+  m_Script: {fileID: 11500000, guid: cd98360daa80b8147989cd2a5d33a59a, type: 3}
+  m_Name: Turorial_Quest 1
   m_EditorClassIdentifier: 
-  objectiveDescription: AreaStep
-  isCompleted: 0
-  triggerTag: QuestTrigger
+  questName: Tutorial
+  objectives:
+  - {fileID: 11400000, guid: 0f221e53b6cd1d74e81983efff439e01, type: 2}
+  requiredQuest: {fileID: 0}
+  questDescription: Belajar berjalan dan menembak
