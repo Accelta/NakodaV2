@@ -6,7 +6,7 @@ public abstract class QuestObjective : ScriptableObject
     public bool isCompleted = false;
 
     public abstract void StartObjective();
-    public abstract void CheckObjectiveCompletion();
+    // public abstract void CheckObjectiveCompletion();
 
     protected void CompleteObjective()
     {

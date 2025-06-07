@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "MoveToObjective", menuName = "Quests/Move Tutorial")]
+[CreateAssetMenu(fileName = "MoveToObjective", menuName = "Quests/Objective/Move Tutorial")]
 public class MoveTutorial : QuestObjective
 {
     public string triggerTag = "QuestTrigger";
@@ -29,10 +29,10 @@ public class MoveTutorial : QuestObjective
         }
     }
 
-    public override void CheckObjectiveCompletion()
-    {
-        // Handled externally
-    }
+    // public override void CheckObjectiveCompletion()
+    // {
+    //     // Handled externally
+    // }
 
     public void OnPlayerEnterTrigger()
     {
