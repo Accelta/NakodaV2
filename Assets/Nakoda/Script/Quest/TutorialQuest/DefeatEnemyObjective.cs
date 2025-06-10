@@ -51,7 +51,7 @@ public override string GetProgress()
     int remaining = tracker.RemainingCount();
     int total = tracker.GetTotalCount();
     int defeated = total - remaining;
-    return $": {defeated}/{total}";
+    return $"{defeated}/{total}";
 }
     
 }

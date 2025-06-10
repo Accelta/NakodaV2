@@ -42,13 +42,14 @@ public class QuestUIController : MonoBehaviour
         rectTransform.DOAnchorPos(hiddenPosition, transitionDuration).SetEase(Ease.InBack);
     }
 
-    public void UpdateQuest(string questTitle, string questDescription)
+public void UpdateQuest(string questTitle, string questDescription, string progressText)
+{
+    rectTransform.DOAnchorPos(hiddenPosition, transitionDuration).SetEase(Ease.InBack).OnComplete(() =>
     {
-        rectTransform.DOAnchorPos(hiddenPosition, transitionDuration).SetEase(Ease.InBack).OnComplete(() =>
-        {
-            ShowQuest(questTitle, questDescription);
-        });
-    }
+        ShowQuest(questTitle, questDescription);
+        UpdateObjectiveProgress(progressText);
+    });
+}
     
 public void UpdateObjectiveProgress(string progressText)
 {
