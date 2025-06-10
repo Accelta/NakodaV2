@@ -15,6 +15,7 @@ public class ShootTarget : QuestObjective
 
     public override void StartObjective()
     {
+        ActivateTargets();
 #if UNITY_EDITOR
         Debug.Log($"Objective Started: Fire at all targets.");
 #endif
@@ -26,6 +27,36 @@ public class ShootTarget : QuestObjective
             QuestMonoHelper.Instance.StartCoroutine(WaitAndRegisterMarker());
         }
     }
+
+private void ActivateTargets()
+{
+    if (manager == null) 
+    {
+#if UNITY_EDITOR
+        Debug.LogError("TargetManager is null! Cannot activate targets.");
+#endif
+        return;
+    }
+
+#if UNITY_EDITOR
+    Debug.Log($"Activating {manager.GetAllTargetObjects().Count} targets...");
+#endif
+
+    foreach (var targetObj in manager.GetAllTargetObjects())
+    {
+        if (targetObj != null)
+        {
+            var targetScript = targetObj.GetComponent<Target>();
+            if (targetScript != null)
+            {
+                targetScript.ActivateAndRegister();
+#if UNITY_EDITOR
+                Debug.Log($"Called ActivateAndRegister on {targetObj.name}");
+#endif
+            }
+        }
+    }
+}
 
     private void TryRegisterMarker()
     {

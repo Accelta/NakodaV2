@@ -50,7 +50,11 @@ public class TargetManager : MonoBehaviour
         return targets.Count;
     }
     public int GetTotalCount()
+    {
+        return initialCount;
+    }
+public List<GameObject> GetAllTargetObjects()
 {
-    return initialCount;
+    return new List<GameObject>(targets);
 }
 }

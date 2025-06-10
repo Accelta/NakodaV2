@@ -1543,6 +1543,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7504551260865562955, guid: 6d492ce2dd2a800449b1091106475e55, type: 3}
+      propertyPath: waypoints.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8642710343000247616, guid: 6d492ce2dd2a800449b1091106475e55, type: 3}
       propertyPath: targetSurface
       value: 
