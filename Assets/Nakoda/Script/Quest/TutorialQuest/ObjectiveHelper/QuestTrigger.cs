@@ -4,9 +4,9 @@ public class QuestTrigger : MonoBehaviour
 {
     public MoveTutorial linkedObjective;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other )
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && linkedObjective != null && linkedObjective.IsActive())
         {
 #if UNITY_EDITOR
             Debug.Log("Player entered quest area!");
