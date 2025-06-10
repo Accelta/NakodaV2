@@ -15,6 +15,4 @@ MonoBehaviour:
   objectiveDescription: TutorialShoot
   isCompleted: 0
   targetobjects:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2496747755164377007, guid: b9633b2df69cd284783298ad54e6bd0b, type: 3}

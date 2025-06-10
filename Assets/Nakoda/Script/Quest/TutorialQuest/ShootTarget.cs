@@ -1,27 +1,24 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "ShootTargetTutorial", menuName = "Quests/Objective/Fire At Target")]
 public class ShootTarget : QuestObjective
 {
-    public List<GameObject> targetobjects; // Assign in Inspector
-    private HashSet<GameObject> targetSet = new HashSet<GameObject>();
+    private TargetManager manager;
     private CompassTarget currentTarget;
     private bool markerAdded = false;
+
+    public void RegisterManager(TargetManager mgr)
+    {
+        manager = mgr;
+    }
 
     public override void StartObjective()
     {
 #if UNITY_EDITOR
-        Debug.Log($"Objective Started: Fire at all targets ({targetobjects.Count})");
+        Debug.Log($"Objective Started: Fire at all targets.");
 #endif
-        targetSet.Clear();
-        foreach (var obj in targetobjects)
-        {
-            if (obj != null)
-                targetSet.Add(obj);
-        }
-
+        markerAdded = false;
         TryRegisterMarker();
 
         if (!markerAdded)
@@ -32,7 +29,7 @@ public class ShootTarget : QuestObjective
 
     private void TryRegisterMarker()
     {
-        GameObject targetObject = GetFirstValidTarget();
+        GameObject targetObject = manager?.GetFirstValidTarget();
         if (targetObject != null)
         {
             currentTarget = targetObject.GetComponent<CompassTarget>();
@@ -47,20 +44,10 @@ public class ShootTarget : QuestObjective
         }
     }
 
-    private GameObject GetFirstValidTarget()
-    {
-        foreach (var obj in targetSet)
-        {
-            if (obj != null)
-                return obj;
-        }
-        return null;
-    }
-
     private IEnumerator WaitAndRegisterMarker()
     {
         float timer = 0f;
-        float timeout = 5f; // Max wait time
+        float timeout = 5f;
 
         while (!markerAdded && timer < timeout)
         {
@@ -77,36 +64,43 @@ public class ShootTarget : QuestObjective
 #endif
     }
 
-    // public override void CheckObjectiveCompletion()
-    // {
-    //     // TargetHit is called externally
-    // }
-
-    // Call this when a target is hit
     public void TargetHit(GameObject hitObject)
     {
-        if (targetSet.Contains(hitObject))
-        {
-            targetSet.Remove(hitObject);
-#if UNITY_EDITOR
-            Debug.Log($"Target {hitObject.name} hit and removed. Remaining: {targetSet.Count}");
-#endif
-            if (currentTarget != null)
-            {
-                CompassManager.Instance?.RemoveMarker(currentTarget);
-                markerAdded = false;
-            }
+        if (manager == null) return;
 
-            if (targetSet.Count == 0)
-            {
-                CompleteObjective();
-            }
-            else
-            {
-                TryRegisterMarker();
-                if (!markerAdded)
-                    QuestMonoHelper.Instance.StartCoroutine(WaitAndRegisterMarker());
-            }
+        manager.RemoveTarget(hitObject);
+        QuestUIController.Instance?.UpdateObjectiveProgress(GetProgress());
+
+#if UNITY_EDITOR
+        Debug.Log($"Target {hitObject.name} hit. Remaining: {manager.RemainingCount()}");
+#endif
+
+        if (currentTarget != null)
+        {
+            CompassManager.Instance?.RemoveMarker(currentTarget);
+            markerAdded = false;
+        }
+
+        if (manager.RemainingCount() == 0)
+        {
+            CompleteObjective();
+            QuestUIController.Instance?.UpdateObjectiveProgress(GetProgress());
+        }
+        else
+        {
+            TryRegisterMarker();
+            if (!markerAdded)
+                QuestMonoHelper.Instance.StartCoroutine(WaitAndRegisterMarker());
         }
     }
+
+public override string GetProgress()
+{
+    if (manager == null) return "";
+    int remaining = manager.RemainingCount();
+    int total = manager.GetTotalCount();
+
+    int shot = total - remaining;
+    return $"{shot}/{total}";
+}
 }

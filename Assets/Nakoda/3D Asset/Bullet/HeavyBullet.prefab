@@ -118,10 +118,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6906012453617094224}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Mass: 8
-  m_Drag: 0
-  m_AngularDrag: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifetime: 12
   impactVFXPrefab: {fileID: 1440544050547825468, guid: 14f9fcbb24a767f49aa86fc4c0f7ff86, type: 3}
-  addScoreOnHit: 1
+  addScoreOnHit: 0
   scoreBullet: 25
 --- !u!96 &-2906782741408171045
 TrailRenderer:

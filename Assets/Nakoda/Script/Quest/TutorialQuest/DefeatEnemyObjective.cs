@@ -6,40 +6,52 @@ public class DefeatEnemiesObjective : QuestObjective
 {
     public List<GameObject> enemies; // Assign via Inspector or runtime spawn
     private HashSet<GameObject> aliveEnemies = new();
+    private EnemyTracker tracker;
     private CompassTarget currentTarget;
+    
 
+    public void RegisterTracker(EnemyTracker mgr)
+    {
+        tracker = mgr;
+    }
     public override void StartObjective()
     {
 #if UNITY_EDITOR
         Debug.Log("Objective Started: Defeat all enemies");
 #endif
-        aliveEnemies.Clear();
-        foreach (var enemy in enemies)
-        {
-            if (enemy != null)
-                aliveEnemies.Add(enemy);
-        }
+
+        // aliveEnemies.Clear();
+        // foreach (var enemy in enemies)
+        // {
+        //     if (enemy != null)
+        //         aliveEnemies.Add(enemy);
+        // }
     }
 
-    public void OnEnemyDefeated(GameObject enemy)
+public void OnEnemyDefeated(GameObject enemy)
     {
-        if (aliveEnemies.Contains(enemy))
-        {
-            aliveEnemies.Remove(enemy);
+        if (tracker == null) return;
+
+        tracker.RemoveEnemy(enemy);
+        QuestUIController.Instance?.UpdateObjectiveProgress(GetProgress());
+
 #if UNITY_EDITOR
-            Debug.Log($"Enemy {enemy.name} defeated. Remaining: {aliveEnemies.Count}");
+        Debug.Log($"Enemy {enemy.name} defeated. Remaining: {tracker.RemainingCount()}");
 #endif
-            if (aliveEnemies.Count == 0)
-            {
-                CompleteObjective();
-            }
+
+        if (tracker.RemainingCount() == 0)
+        {
+            CompleteObjective();
         }
     }
 
-    // public override void CheckObjectiveCompletion()
-    // {
-    //     // TargetHit is called externally
-    // }
-    
+public override string GetProgress()
+{
+    if (tracker == null) return "";
+    int remaining = tracker.RemainingCount();
+    int total = tracker.GetTotalCount();
+    int defeated = total - remaining;
+    return $": {defeated}/{total}";
+}
     
 }

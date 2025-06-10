@@ -11,15 +11,19 @@ public abstract class QuestObjective : ScriptableObject
     protected void CompleteObjective()
     {
         isCompleted = true;
-        
-        #if UNITY_EDITOR
+
+#if UNITY_EDITOR
         Debug.Log($"Objective Completed: {objectiveDescription}");
-        #endif
-        QuestManager.Instance?.UpdateObjectives();
+#endif
+        QuestManager.Instance.UpdateObjectives();
     }
 
     public void ResetObjective()
     {
         isCompleted = false;
     }
+    public virtual string GetProgress()
+{
+    return ""; // Default: kosong, override di subclass
+}
 }

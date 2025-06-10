@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6625a2183a2a3104e950d0030f528679, type: 3}
   m_Name: DefeatEnemiesObjectiveTutorial
   m_EditorClassIdentifier: 
-  objectiveDescription: 
+  objectiveDescription: Shoot all enemies
   isCompleted: 0
   enemies: []

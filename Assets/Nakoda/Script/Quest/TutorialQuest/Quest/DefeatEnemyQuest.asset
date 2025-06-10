@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd98360daa80b8147989cd2a5d33a59a, type: 3}
   m_Name: DefeatEnemyQuest
   m_EditorClassIdentifier: 
-  questName: 
-  objectives: []
-  requiredQuest: {fileID: 0}
-  questDescription: 
+  questName: Shoot all enemy
+  objectives:
+  - {fileID: 11400000, guid: 107cd726dd70d7642b2efd00969809e9, type: 2}
+  requiredQuest: {fileID: 11400000, guid: 98783665a5740b3468722b646d81e483, type: 2}
+  questDescription: Shoot all the enemies

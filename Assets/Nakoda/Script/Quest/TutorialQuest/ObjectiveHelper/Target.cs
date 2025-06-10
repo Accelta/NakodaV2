@@ -1,22 +1,37 @@
 using UnityEngine;
 
-// filepath: c:\Users\Axel\Documents\UnityProject\NakodaV2\Assets\Nakoda\Script\Quest\TutorialQuest\Target.cs
 public class Target : MonoBehaviour
 {
     public ShootTarget linkedObjective;
 
-    private void OnCollisionEnter(Collision collision)
+    private void Start()
     {
-        if (collision.gameObject.CompareTag("Bullet"))
+        if (linkedObjective != null)
         {
-            #if UNITY_EDITOR
-            Debug.Log("Target hit!");
-            #endif
+            var manager = FindFirstObjectByType<TargetManager>();
+            if (manager != null)
+                manager.RegisterTarget(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Bullet"))
+        {
             if (linkedObjective != null)
             {
-                linkedObjective.TargetHit(gameObject); // Pass this target GameObject
+                linkedObjective.TargetHit(gameObject);
+                
+#if UNITY_EDITOR
+                Debug.Log("Target hit and quest linked.");
+                #endif
             }
-            Destroy(gameObject); // Destroy target after hit
+
+            Destroy(gameObject);
+
+#if UNITY_EDITOR
+            Debug.Log("Target Destroyed");
+#endif
         }
     }
 }

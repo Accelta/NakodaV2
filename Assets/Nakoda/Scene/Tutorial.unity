@@ -2734,6 +2734,10 @@ PrefabInstance:
       propertyPath: regionSize.x
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 5503936076935613492, guid: d6a45e0973ce9e94091cc3fb796babab, type: 3}
+      propertyPath: targetSurface
+      value: 
+      objectReference: {fileID: 1107101528}
     - target: {fileID: 7755731131221639380, guid: d6a45e0973ce9e94091cc3fb796babab, type: 3}
       propertyPath: m_Name
       value: PlayerShip 1
@@ -4040,6 +4044,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allQuests: []
   activeQuests: []
+  completedQuests: []
   barriers: []
 --- !u!4 &768546067
 Transform:
