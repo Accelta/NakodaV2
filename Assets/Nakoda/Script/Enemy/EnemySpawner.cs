@@ -41,14 +41,17 @@ public class EnemySpawner : MonoBehaviour
     {
         if (enemyPrefab == null)
         {
+#if UNITY_EDITOR
             Debug.LogWarning("Enemy prefab is not assigned.");
             return;
+#endif
         }
 
         Vector3 randomPosition = GetRandomPositionInArea();
         Instantiate(enemyPrefab, randomPosition, Quaternion.identity);
-
+#if UNITY_EDITOR
         Debug.Log($"Spawned enemy at {randomPosition}");
+        #endif
     }
 
     Vector3 GetRandomPositionInArea()

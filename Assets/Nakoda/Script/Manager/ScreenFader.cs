@@ -15,7 +15,9 @@ public class ScreenFader : MonoBehaviour
     {
         if (fadeCanvasGroup == null)
         {
+        #if UNITY_EDITOR
             Debug.LogError("CanvasGroup not assigned!");
+        #endif
             return;
         }
 

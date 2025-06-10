@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: HeavyBulletData
   m_EditorClassIdentifier: 
   bulletForce: 500
-  bulletDamage: 5
+  bulletDamage: 100
   gravity: 11.85

@@ -35,8 +35,11 @@ public class Health : MonoBehaviour
         currentHealth -= damageAmount;
         currentHealth = Mathf.Max(currentHealth, 0f);
 
+        #if UNITY_EDITOR
         Debug.Log($"{gameObject.name} hit!");
         Debug.Log($"Taking damage: {damageAmount}");
+        #endif
+
 
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
 
@@ -50,7 +53,10 @@ public class Health : MonoBehaviour
 
     void Die()
     {
+
+        #if UNITY_EDITOR
         Debug.Log($"{gameObject.name} died!");
+        #endif
         OnHealthChanged?.Invoke(0f, maxHealth);
         OnDeath?.Invoke();
         
@@ -59,7 +65,9 @@ public class Health : MonoBehaviour
                 if (cannon != null)
                 {
                     cannon.enabled = false;
+                    #if UNITY_EDITOR
                     Debug.Log($"{gameObject.name}'s CannonRotation disabled on death.");
+                    #endif
                 }
 
         if (CompareTag("Player"))
@@ -116,7 +124,9 @@ public class Health : MonoBehaviour
     void PauseGame()
     {
         Time.timeScale = 0f;
+        #if UNITY_EDITOR
         Debug.Log("Game Over! The ship was hit.");
+        #endif
     }
 
     public float GetCurrentHealth()

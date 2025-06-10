@@ -87,7 +87,9 @@ public class CompassManager : MonoBehaviour
         {
             markers.Remove(marker);
             Destroy(marker.icon.gameObject);
+        #if UNITY_EDITOR
             Debug.Log($"Marker for {target.name} removed from compass.");
+        #endif
         }
         
     }

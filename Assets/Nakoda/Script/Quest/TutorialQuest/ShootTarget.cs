@@ -1,42 +1,25 @@
-// using UnityEngine;
-
-// [CreateAssetMenu(fileName = "ShootTargetTutorial", menuName = "Quests/Fire At Target")]
-// public class ShootTarget : QuestObjective
-// {
-//  public string targetTag = "QuestTarget"; // Set tag for targets in the scene
- 
-
-//     public override void StartObjective()
-//     {
-//         Debug.Log($"Objective Started: Fire at an object tagged '{targetTag}'");
-
-//     }
-
-//     public override void CheckObjectiveCompletion()
-//     {
-//         // The target itself calls TargetHit()
-//     }
-
-//     public void TargetHit()
-//     {
-//         CompleteObjective();
-//     }
-// }
 using UnityEngine;
 using System.Collections;
 
-[CreateAssetMenu(fileName = "ShootTargetTutorial", menuName = "Quests/Fire At Target")]
+[CreateAssetMenu(fileName = "ShootTargetTutorial", menuName = "Quests/Objective/Fire At Target")]
 public class ShootTarget : QuestObjective
 {
-    public string targetTag = "QuestTarget"; // Tag objek target di scene
+    private TargetManager manager;
     private CompassTarget currentTarget;
     private bool markerAdded = false;
 
+    public void RegisterManager(TargetManager mgr)
+    {
+        manager = mgr;
+    }
+
     public override void StartObjective()
     {
-        Debug.Log($"Objective Started: Fire at an object tagged '{targetTag}'");
-
-        TryRegisterMarker(); // Coba langsung
+#if UNITY_EDITOR
+        Debug.Log($"Objective Started: Fire at all targets.");
+#endif
+        markerAdded = false;
+        TryRegisterMarker();
 
         if (!markerAdded)
         {
@@ -46,7 +29,7 @@ public class ShootTarget : QuestObjective
 
     private void TryRegisterMarker()
     {
-        GameObject targetObject = GameObject.FindWithTag(targetTag);
+        GameObject targetObject = manager?.GetFirstValidTarget();
         if (targetObject != null)
         {
             currentTarget = targetObject.GetComponent<CompassTarget>();
@@ -54,7 +37,9 @@ public class ShootTarget : QuestObjective
             {
                 CompassManager.Instance?.AddMarker(currentTarget);
                 markerAdded = true;
+#if UNITY_EDITOR
                 Debug.Log("Compass marker registered successfully.");
+#endif
             }
         }
     }
@@ -62,7 +47,7 @@ public class ShootTarget : QuestObjective
     private IEnumerator WaitAndRegisterMarker()
     {
         float timer = 0f;
-        float timeout = 5f; // Max wait time
+        float timeout = 5f;
 
         while (!markerAdded && timer < timeout)
         {
@@ -71,24 +56,51 @@ public class ShootTarget : QuestObjective
             timer += 0.5f;
         }
 
+#if UNITY_EDITOR
         if (!markerAdded)
         {
             Debug.LogWarning("Target marker not found within timeout.");
         }
+#endif
     }
 
-    public override void CheckObjectiveCompletion()
+    public void TargetHit(GameObject hitObject)
     {
-        // TargetHit dipanggil dari luar
-    }
+        if (manager == null) return;
 
-    public void TargetHit()
-    {
-        CompleteObjective();
+        manager.RemoveTarget(hitObject);
+        QuestUIController.Instance?.UpdateObjectiveProgress(GetProgress());
+
+#if UNITY_EDITOR
+        Debug.Log($"Target {hitObject.name} hit. Remaining: {manager.RemainingCount()}");
+#endif
 
         if (currentTarget != null)
         {
             CompassManager.Instance?.RemoveMarker(currentTarget);
+            markerAdded = false;
+        }
+
+        if (manager.RemainingCount() == 0)
+        {
+            CompleteObjective();
+            QuestUIController.Instance?.UpdateObjectiveProgress(GetProgress());
+        }
+        else
+        {
+            TryRegisterMarker();
+            if (!markerAdded)
+                QuestMonoHelper.Instance.StartCoroutine(WaitAndRegisterMarker());
         }
     }
+
+public override string GetProgress()
+{
+    if (manager == null) return "";
+    int remaining = manager.RemainingCount();
+    int total = manager.GetTotalCount();
+
+    int shot = total - remaining;
+    return $"{shot}/{total}";
+}
 }

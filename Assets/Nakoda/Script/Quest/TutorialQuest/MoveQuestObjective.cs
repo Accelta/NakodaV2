@@ -1,55 +1,53 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "MoveQuestObjective", menuName = "Quests/Move Quest")]
-public class MoveQuestObjective : QuestObjective
+[CreateAssetMenu(fileName = "MoveToObjective", menuName = "Quests/Objective/Move Tutorial")]
+public class MoveTutorial : QuestObjective
 {
-    [Header("Destination Settings")]
-    public GameObject destinationPrefab; // Prefab to spawn
-    public Vector3 spawnPosition;        // Where to spawn the objective marker
-    public string playerTag = "Player";  // What tag should trigger it
-
-    private GameObject spawnedInstance;
-    private MoveQuestTrigger triggerScript;
+    public string triggerTag = "QuestTrigger";
+    private CompassTarget currentTarget; // Reference to the marker added
+     public bool isActive = false; // ✅ Status aktif
 
     public override void StartObjective()
     {
-        Debug.Log("MoveQuestObjective Started");
-
-        if (destinationPrefab != null)
+#if UNITY_EDITOR
+        Debug.Log($"Objective Started: Move to the area marked by {triggerTag}");
+#endif  
+         isActive = true;
+        GameObject triggerObject = GameObject.FindWithTag(triggerTag);
+        if (triggerObject != null)
         {
-            spawnedInstance = GameObject.Instantiate(destinationPrefab, spawnPosition, Quaternion.identity);
-            triggerScript = spawnedInstance.GetComponent<MoveQuestTrigger>();
-
-            if (triggerScript != null)
+            currentTarget = triggerObject.GetComponent<CompassTarget>();
+            if (currentTarget != null)
             {
-                triggerScript.Initialize(this, playerTag);
-            }
-            else
-            {
-                Debug.LogError("MoveQuestTrigger script missing on destinationPrefab.");
+                CompassManager.Instance?.AddMarker(currentTarget);
             }
         }
         else
         {
-            Debug.LogError("Destination Prefab is not assigned.");
+#if UNITY_EDITOR
+            Debug.LogWarning("Trigger object not found for compass registration.");
+#endif
         }
     }
-
-    public override void CheckObjectiveCompletion()
+    public bool IsActive()
     {
-        // Not used directly; triggered externally
+        return isActive;
     }
+    // public override void CheckObjectiveCompletion()
+    // {
+    //     // Handled externally
+    // }
 
-    public void OnPlayerReachDestination()
+    public void OnPlayerEnterTrigger()
     {
+         if (!isActive) return;
         CompleteObjective();
 
-        if (spawnedInstance != null)
-            spawnedInstance.SetActive(false);
-    }
+        if (currentTarget != null)
+        {
+            CompassManager.Instance?.RemoveMarker(currentTarget);
 
-    public virtual void ResetObjective()
-{
-    isCompleted = false;
-}
+        }
+         isActive = false;
+    }
 }

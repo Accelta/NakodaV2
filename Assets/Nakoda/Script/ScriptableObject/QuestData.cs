@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewQuest", menuName = "Quests/Quest Data")]
+[CreateAssetMenu(fileName = "NewQuest", menuName = "Quests/Data/Quest Data")]
 public class QuestData : ScriptableObject
 {
     public string questName;
@@ -21,7 +21,9 @@ public class QuestData : ScriptableObject
 
     public void StartQuest()
     {
+        #if UNITY_EDITOR
         Debug.Log($"Quest Started: {questName}");
+        #endif
         foreach (var objective in objectives)
         {
             objective.StartObjective();

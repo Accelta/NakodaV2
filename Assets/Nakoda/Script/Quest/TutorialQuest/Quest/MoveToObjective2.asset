@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd98360daa80b8147989cd2a5d33a59a, type: 3}
+  m_Name: MoveToObjective2
+  m_EditorClassIdentifier: 
+  questName: Move To Objective again
+  objectives:
+  - {fileID: 11400000, guid: 35e8118b5a71f164dbf381c87b153fd1, type: 2}
+  requiredQuest: {fileID: 11400000, guid: de5773c563ce8c9449de09fccb1138d9, type: 2}
+  questDescription: Go to destination

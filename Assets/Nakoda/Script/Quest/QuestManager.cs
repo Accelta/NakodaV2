@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
-
+using DG.Tweening;
 public class QuestManager : MonoBehaviour
 {
     public static QuestManager Instance { get; private set; }
@@ -9,6 +10,7 @@ public class QuestManager : MonoBehaviour
     public List<QuestData> activeQuests = new List<QuestData>();
     public List<QuestData> completedQuests = new List<QuestData>(); // <-- Add this line
     public List<GameObject> barriers; // Barriers that should be removed when certain quests are completed
+    private QuestData currentQuest;
 
     private void Awake()
     {
@@ -18,7 +20,6 @@ public class QuestManager : MonoBehaviour
 
     private void Start()
     {
-        ResetAllQuestObjectives();  // ✅ Reset state when the game starts
         CheckAvailableQuests();
     }
 
@@ -30,10 +31,53 @@ public class QuestManager : MonoBehaviour
             {
                 activeQuests.Add(quest);
                 quest.StartQuest();
+
+                if (currentQuest == null)
+                {
+                    currentQuest = quest;
+                    QuestUIController.Instance?.ShowQuest(quest.questName, quest.questDescription);
+                }
             }
         }
     }
 
+    //     public void UpdateObjectives()
+    //     {
+    //         for (int i = activeQuests.Count - 1; i >= 0; i--)
+    //         {
+    //             var quest = activeQuests[i];
+    //             if (quest.IsQuestCompleted())
+    //             {
+    // #if UNITY_EDITOR
+    //                 Debug.Log($"Quest {quest.questName} Completed!");
+    // #endif
+    //                 UnlockNewQuests(quest);
+    //                 RemoveBarriers(quest);
+    //                 completedQuests.Add(quest); // <-- Add to completed list
+    //                 activeQuests.RemoveAt(i);   // Optionally remove from active
+
+    //                 if (currentQuest == quest)
+    //                 {
+    //                     QuestUIController.Instance?.HideQuest();
+    //                     currentQuest = null;
+    //                 }
+    //             }
+    //         }
+    // if (currentQuest == null && activeQuests.Count > 0)
+    // {
+    //     currentQuest = activeQuests[0];
+    //     QuestUIController.Instance?.UpdateQuest(currentQuest.questName, currentQuest.questDescription);
+
+    //     // Immediately update progress for the new quest
+    //     string progressText = GetObjectiveProgressText(currentQuest);
+    //     QuestUIController.Instance?.UpdateObjectiveProgress(progressText);
+    // }
+    // else if (currentQuest != null)
+    // {
+    //     string progressText = GetObjectiveProgressText(currentQuest);
+    //     QuestUIController.Instance?.UpdateObjectiveProgress(progressText);
+    // }
+    //     }
     public void UpdateObjectives()
     {
         for (int i = activeQuests.Count - 1; i >= 0; i--)
@@ -41,14 +85,50 @@ public class QuestManager : MonoBehaviour
             var quest = activeQuests[i];
             if (quest.IsQuestCompleted())
             {
+#if UNITY_EDITOR
                 Debug.Log($"Quest {quest.questName} Completed!");
+#endif
                 UnlockNewQuests(quest);
                 RemoveBarriers(quest);
-                completedQuests.Add(quest); // <-- Add to completed list
-                activeQuests.RemoveAt(i);   // Optionally remove from active
+                completedQuests.Add(quest);
+                activeQuests.RemoveAt(i);
+
+                if (currentQuest == quest)
+                {
+                    QuestUIController.Instance?.HideQuest();
+                    currentQuest = null;
+                }
             }
         }
+
+        // Always update currentQuest and progress after quest completion
+        if (currentQuest == null && activeQuests.Count > 0)
+        {
+            currentQuest = activeQuests[0];
+            QuestUIController.Instance?.UpdateQuest(
+                currentQuest.questName,
+                currentQuest.questDescription,
+                GetObjectiveProgressText(currentQuest)
+            );
+        }
+        else if (currentQuest != null)
+        {
+            // Only update progress if quest is not changing
+            string progressText = GetObjectiveProgressText(currentQuest);
+            QuestUIController.Instance?.UpdateObjectiveProgress(progressText);
+        }
+        else
+        {
+            QuestUIController.Instance?.UpdateObjectiveProgress("");
+        }
     }
+
+private System.Collections.IEnumerator DelayedProgressUpdate()
+{
+    yield return null; // wait one frame
+    string progressText = GetObjectiveProgressText(currentQuest);
+    QuestUIController.Instance?.UpdateObjectiveProgress(progressText);
+}
 
     private void UnlockNewQuests(QuestData completedQuest)
     {
@@ -57,7 +137,9 @@ public class QuestManager : MonoBehaviour
             if (!activeQuests.Contains(quest) && !completedQuests.Contains(quest) && quest.requiredQuest == completedQuest)
             {
                 activeQuests.Add(quest);
+#if UNITY_EDITOR
                 Debug.Log($"New Quest Unlocked: {quest.questName}");
+#endif
                 quest.StartQuest();
             }
         }
@@ -72,19 +154,53 @@ public class QuestManager : MonoBehaviour
             {
                 Destroy(barriers[i]);
                 barriers.RemoveAt(i);
+#if UNITY_EDITOR
                 Debug.Log($"Barrier Removed: {barrier.gameObject.name}");
+#endif
             }
         }
     }
 
-    private void ResetAllQuestObjectives()
+private string GetObjectiveProgressText(QuestData quest)
 {
-    foreach (var quest in allQuests)
+    if (quest == null || quest.objectives == null || quest.objectives.Count == 0)
+        return "";
+
+    List<string> progressLines = new List<string>();
+    foreach (var obj in quest.objectives)
     {
-        foreach (var objective in quest.objectives)
-        {
-            objective.ResetObjective(); // This uses the ResetObjective() method you added to QuestObjective
-        }
+        string progress = obj.GetProgress();
+        if (!string.IsNullOrEmpty(progress))
+            progressLines.Add(progress);
     }
+
+    return string.Join("\n", progressLines);
 }
+
+
+#if UNITY_EDITOR
+    [InitializeOnLoadMethod]
+    private static void ResetObjectiveOnExitPlaymode()
+    {
+        EditorApplication.playModeStateChanged += (State) =>
+        {
+            if (State == PlayModeStateChange.ExitingPlayMode)
+            {
+                string[] guids = AssetDatabase.FindAssets("t:QuestData");
+                foreach (string guid in guids)
+                {
+                    string path = AssetDatabase.GUIDToAssetPath(guid);
+                    QuestData quest = AssetDatabase.LoadAssetAtPath<QuestData>(path);
+                    if (quest != null)
+                    {
+                        quest.ResetObjectives();
+                        EditorUtility.SetDirty(quest);
+                    }
+                }
+                AssetDatabase.SaveAssets();
+                Debug.Log("all objective in quest resetted");
+            }
+        };
+    }
+#endif
 }
