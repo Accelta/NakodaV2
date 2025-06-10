@@ -64,7 +64,7 @@ public class BoatBuoyancy : MonoBehaviour
         WaterSearchParameters searchParameters = new WaterSearchParameters();
         WaterSearchResult searchResult = new WaterSearchResult();
 
-        searchParameters.startPositionWS = searchResult.candidateLocationWS;
+        searchParameters.startPositionWS = point; // ✅ Correct
         searchParameters.targetPositionWS = point;
         searchParameters.error = 0.01f;
         searchParameters.maxIterations = 8;

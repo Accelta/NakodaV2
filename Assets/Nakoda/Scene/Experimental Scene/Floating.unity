@@ -1320,7 +1320,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 492a6dae2392e79448f38fc680e49cda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  linkedObjective: {fileID: 11400000, guid: 65be7d91270a4d5469b4b7e7ed7ecb9b, type: 2}
 --- !u!114 &1739807728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3880,7 +3879,7 @@ PrefabInstance:
     - target: {fileID: 5503936076935613492, guid: d6a45e0973ce9e94091cc3fb796babab, type: 3}
       propertyPath: targetSurface
       value: 
-      objectReference: {fileID: 498358116}
+      objectReference: {fileID: 0}
     - target: {fileID: 7755731131221639380, guid: d6a45e0973ce9e94091cc3fb796babab, type: 3}
       propertyPath: m_Name
       value: PlayerShip
