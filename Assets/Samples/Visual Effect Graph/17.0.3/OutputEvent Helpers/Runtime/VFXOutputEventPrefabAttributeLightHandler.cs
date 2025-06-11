@@ -26,7 +26,7 @@ namespace UnityEngine.VFX.Utility
 #if VFX_OUTPUTEVENT_HDRP_10_0_0_OR_NEWER
             var hdlight = GetComponent<HDAdditionalLightData>();
             hdlight.SetColor(c);
-            hdlight.SetIntensity(intensity);
+            hdlight.intensity = intensity;
 #else
             var light = GetComponent<Light>();
             light.color = c;

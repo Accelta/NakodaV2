@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd98360daa80b8147989cd2a5d33a59a, type: 3}
   m_Name: Turorial_Quest
   m_EditorClassIdentifier: 
-  questName: Tutorial
+  questName: Move to area
   objectives:
   - {fileID: 11400000, guid: 65be7d91270a4d5469b4b7e7ed7ecb9b, type: 2}
   requiredQuest: {fileID: 0}
-  questDescription: Move to target area
+  questDescription: Move to area (Watch Compass)

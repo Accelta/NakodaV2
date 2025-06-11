@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cd98360daa80b8147989cd2a5d33a59a, type: 3}
-  m_Name: DefeatEnemyQuest
+  m_Name: Movetoobjective3
   m_EditorClassIdentifier: 
-  questName: Shoot all enemy
+  questName: Move to area
   objectives:
-  - {fileID: 11400000, guid: 107cd726dd70d7642b2efd00969809e9, type: 2}
-  requiredQuest: {fileID: 11400000, guid: 98783665a5740b3468722b646d81e483, type: 2}
-  questDescription: 'Defeat all enemies '
+  - {fileID: 11400000, guid: 815456bf4ae44b148a7efaa3a20e64d1, type: 2}
+  requiredQuest: {fileID: 11400000, guid: 8e15e03ff023fe84aa65587805ec9205, type: 2}
+  questDescription: Move to area (Watch Compass)

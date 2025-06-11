@@ -15,59 +15,42 @@ public class ScreenFader : MonoBehaviour
     {
         if (fadeCanvasGroup == null)
         {
-        #if UNITY_EDITOR
-            Debug.LogError("CanvasGroup not assigned!");
-        #endif
+            Debug.LogError("CanvasGroup not assigned to ScreenFader.");
             return;
         }
 
-        fadeCanvasGroup.alpha = 1f; // Start fully black
+        // Start fully opaque
+        fadeCanvasGroup.alpha = 1f;
     }
 
     void Start()
     {
-        StartCoroutine(DelayedFadeOut());
-    }
-
-    IEnumerator DelayedFadeOut()
-    {
-        yield return null; // Let frame render fully black first
-        yield return FadeOut();
-    }
-
-    IEnumerator FadeOut()
-    {
-        float timer = 0f;
-        while (timer < fadeDuration)
-        {
-            timer += Time.unscaledDeltaTime;
-            float t = Mathf.Clamp01(timer / fadeDuration);
-            fadeCanvasGroup.alpha = 1f - Mathf.SmoothStep(0f, 1f, t);
-            yield return null;
-        }
-
-        fadeCanvasGroup.alpha = 0f; // Final clear
+        StartCoroutine(FadeCanvasGroup(1f, 0f)); // Fade from black to transparent
     }
 
     public void FadeAndRestart()
     {
-        StartCoroutine(FadeInAndRestart());
+        StartCoroutine(FadeOutAndReload());
     }
 
-    IEnumerator FadeInAndRestart()
+    private IEnumerator FadeCanvasGroup(float from, float to)
     {
-        float timer = 0f;
-        while (timer < fadeDuration)
+        float elapsed = 0f;
+
+        while (elapsed < fadeDuration)
         {
-            timer += Time.unscaledDeltaTime;
-            float t = Mathf.Clamp01(timer / fadeDuration);
-            fadeCanvasGroup.alpha = Mathf.SmoothStep(0f, 1f, t);
+            elapsed += Time.deltaTime;
+            fadeCanvasGroup.alpha = Mathf.Lerp(from, to, elapsed / fadeDuration);
             yield return null;
         }
 
-        yield return new WaitForSecondsRealtime(delayBeforeRestart);
-
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        fadeCanvasGroup.alpha = to;
     }
+
+    private IEnumerator FadeOutAndReload()
+    {
+        yield return FadeCanvasGroup(0f, 1f); // Fade to black
+        yield return new WaitForSeconds(delayBeforeRestart);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }

@@ -6,7 +6,7 @@ public class SceneLoader : MonoBehaviour
     // Loads the scene named "Play"
     public void Play()
     {
-        SceneManager.LoadScene("Tutorial");
+        SceneManager.LoadScene(1);
     }
 
     // Quits the application
