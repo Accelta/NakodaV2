@@ -40,9 +40,25 @@ initialCount = enemies.Count;
         enemies.RemoveWhere(e => e == null);
         return enemies.Count;
     }
-    
+
     public int GetTotalCount()
+    {
+        return initialCount;
+    }
+public List<GameObject> GetAllAliveEnemies()
 {
-return initialCount;
+    // Clean up any null references first
+    enemies.RemoveWhere(e => e == null);
+    
+    // Return all alive enemies
+    var aliveList = new List<GameObject>();
+    foreach (var enemy in enemies)
+    {
+        if (enemy != null && enemy.activeInHierarchy)
+        {
+            aliveList.Add(enemy);
+        }
+    }
+    return aliveList;
 }
 }

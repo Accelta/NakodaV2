@@ -2104,6 +2104,7 @@ GameObject:
   - component: {fileID: 2182709048485861166}
   - component: {fileID: 2447919762125153635}
   - component: {fileID: -7011272131257231563}
+  - component: {fileID: 4808133086442393137}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
@@ -2330,6 +2331,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defeatObjective: {fileID: 11400000, guid: 107cd726dd70d7642b2efd00969809e9, type: 2}
+--- !u!114 &4808133086442393137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4477557821618875988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10926b997f77e3b438cfacfd34fde726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  markerData: {fileID: 11400000, guid: 3041e9c8c5a58ba45a041a8e76b68bde, type: 2}
 --- !u!1 &4574453860573442700
 GameObject:
   m_ObjectHideFlags: 0
