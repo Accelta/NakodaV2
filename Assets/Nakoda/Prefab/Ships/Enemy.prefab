@@ -2103,6 +2103,7 @@ GameObject:
   - component: {fileID: 3172314784619895306}
   - component: {fileID: 2182709048485861166}
   - component: {fileID: 2447919762125153635}
+  - component: {fileID: -7011272131257231563}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
@@ -2147,10 +2148,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4477557821618875988}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Mass: 25
-  m_Drag: 5
-  m_AngularDrag: 30
+  m_LinearDamping: 5
+  m_AngularDamping: 30
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -2316,6 +2317,19 @@ MonoBehaviour:
   detectionRange: 500
   engageRange: 100
   playerPrefab: {fileID: 0}
+--- !u!114 &-7011272131257231563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4477557821618875988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e39877f7d773b3a4f9df5074b61333c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defeatObjective: {fileID: 11400000, guid: 107cd726dd70d7642b2efd00969809e9, type: 2}
 --- !u!1 &4574453860573442700
 GameObject:
   m_ObjectHideFlags: 0

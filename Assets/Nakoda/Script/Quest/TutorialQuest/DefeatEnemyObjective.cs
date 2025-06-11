@@ -8,6 +8,7 @@ public class DefeatEnemiesObjective : QuestObjective
     private HashSet<GameObject> aliveEnemies = new();
     private EnemyTracker tracker;
     private CompassTarget currentTarget;
+    private EnemySpawner spawner;
     
 
     public void RegisterTracker(EnemyTracker mgr)
@@ -26,6 +27,7 @@ public class DefeatEnemiesObjective : QuestObjective
         //     if (enemy != null)
         //         aliveEnemies.Add(enemy);
         // }
+        spawner.SpawnEnemies();
     }
 
 public void OnEnemyDefeated(GameObject enemy)
@@ -53,5 +55,11 @@ public override string GetProgress()
     int defeated = total - remaining;
     return $"{defeated}/{total}";
 }
-    
+    public void RegisterSpawner(EnemySpawner spawnerRef)
+{
+    spawner = spawnerRef;
+#if UNITY_EDITOR
+    Debug.Log("EnemySpawner registered successfully.");
+#endif
+}
 }

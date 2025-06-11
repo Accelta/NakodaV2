@@ -78,58 +78,117 @@ public class QuestManager : MonoBehaviour
     //     QuestUIController.Instance?.UpdateObjectiveProgress(progressText);
     // }
     //     }
-    public void UpdateObjectives()
+//     public void UpdateObjectives()
+//     {
+//         for (int i = activeQuests.Count - 1; i >= 0; i--)
+//         {
+//             var quest = activeQuests[i];
+//             if (quest.IsQuestCompleted())
+//             {
+// #if UNITY_EDITOR
+//                 Debug.Log($"Quest {quest.questName} Completed!");
+// #endif
+//                 UnlockNewQuests(quest);
+//                 RemoveBarriers(quest);
+//                 completedQuests.Add(quest);
+//                 activeQuests.RemoveAt(i);
+
+//                 if (currentQuest == quest)
+//                 {
+//                     QuestUIController.Instance?.HideQuest();
+//                     currentQuest = null;
+//                 }
+//             }
+//         }
+
+//         // Always update currentQuest and progress after quest completion
+//         if (currentQuest == null && activeQuests.Count > 0)
+//         {
+//             currentQuest = activeQuests[0];
+//             QuestUIController.Instance?.UpdateQuest(
+//                 currentQuest.questName,
+//                 currentQuest.questDescription,
+//                 GetObjectiveProgressText(currentQuest)
+//             );
+//         }
+//         else if (currentQuest != null)
+//         {
+//             // Only update progress if quest is not changing
+//             string progressText = GetObjectiveProgressText(currentQuest);
+//             QuestUIController.Instance?.UpdateObjectiveProgress(progressText);
+//         }
+//         else
+//         {
+//             QuestUIController.Instance?.UpdateObjectiveProgress("");
+//         }
+//     }
+
+// private System.Collections.IEnumerator DelayedProgressUpdate()
+// {
+//     yield return null; // wait one frame
+//     string progressText = GetObjectiveProgressText(currentQuest);
+//     QuestUIController.Instance?.UpdateObjectiveProgress(progressText);
+// }
+public void UpdateObjectives()
+{
+    for (int i = activeQuests.Count - 1; i >= 0; i--)
     {
-        for (int i = activeQuests.Count - 1; i >= 0; i--)
+        var quest = activeQuests[i];
+        if (quest.IsQuestCompleted())
         {
-            var quest = activeQuests[i];
-            if (quest.IsQuestCompleted())
-            {
 #if UNITY_EDITOR
-                Debug.Log($"Quest {quest.questName} Completed!");
+            Debug.Log($"Quest {quest.questName} Completed!");
 #endif
-                UnlockNewQuests(quest);
-                RemoveBarriers(quest);
-                completedQuests.Add(quest);
-                activeQuests.RemoveAt(i);
+            UnlockNewQuests(quest);
+            RemoveBarriers(quest);
+            completedQuests.Add(quest);
+            activeQuests.RemoveAt(i);
 
-                if (currentQuest == quest)
-                {
-                    QuestUIController.Instance?.HideQuest();
-                    currentQuest = null;
-                }
+            if (currentQuest == quest)
+            {
+                QuestUIController.Instance?.HideQuest();
+                currentQuest = null;
             }
-        }
-
-        // Always update currentQuest and progress after quest completion
-        if (currentQuest == null && activeQuests.Count > 0)
-        {
-            currentQuest = activeQuests[0];
-            QuestUIController.Instance?.UpdateQuest(
-                currentQuest.questName,
-                currentQuest.questDescription,
-                GetObjectiveProgressText(currentQuest)
-            );
-        }
-        else if (currentQuest != null)
-        {
-            // Only update progress if quest is not changing
-            string progressText = GetObjectiveProgressText(currentQuest);
-            QuestUIController.Instance?.UpdateObjectiveProgress(progressText);
-        }
-        else
-        {
-            QuestUIController.Instance?.UpdateObjectiveProgress("");
         }
     }
 
-private System.Collections.IEnumerator DelayedProgressUpdate()
-{
-    yield return null; // wait one frame
-    string progressText = GetObjectiveProgressText(currentQuest);
-    QuestUIController.Instance?.UpdateObjectiveProgress(progressText);
+    // Always update currentQuest and progress after quest completion
+    if (currentQuest == null && activeQuests.Count > 0)
+    {
+        currentQuest = activeQuests[0];
+        QuestUIController.Instance?.UpdateQuest(
+            currentQuest.questName,
+            currentQuest.questDescription,
+            "" // Start with empty progress text
+        );
+        
+        // Delay progress update to allow enemies to spawn and register
+        StartCoroutine(DelayedProgressUpdate());
+    }
+    else if (currentQuest != null)
+    {
+        // Only update progress if quest is not changing
+        string progressText = GetObjectiveProgressText(currentQuest);
+        QuestUIController.Instance?.UpdateObjectiveProgress(progressText);
+    }
+    else
+    {
+        QuestUIController.Instance?.UpdateObjectiveProgress("");
+    }
 }
 
+private System.Collections.IEnumerator DelayedProgressUpdate()
+{
+    yield return new WaitForSeconds(3f); // Wait for enemies to spawn and register
+    if (currentQuest != null)
+    {
+        string progressText = GetObjectiveProgressText(currentQuest);
+        QuestUIController.Instance?.UpdateObjectiveProgress(progressText);
+#if UNITY_EDITOR
+        Debug.Log($"Delayed progress update: {progressText}");
+#endif
+    }
+}
     private void UnlockNewQuests(QuestData completedQuest)
     {
         foreach (var quest in allQuests)
