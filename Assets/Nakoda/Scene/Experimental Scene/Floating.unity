@@ -305,8 +305,8 @@ Transform:
   m_GameObject: {fileID: 21127777}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -37.7, y: 3.2424, z: 5.4}
-  m_LocalScale: {x: 21.30213, y: 2.8140113, z: 21.30213}
+  m_LocalPosition: {x: -23.1, y: 3.2424, z: 5.4}
+  m_LocalScale: {x: 43.73395, y: 5.51107, z: 48.297997}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1067,7 +1067,7 @@ Light:
   serializedVersion: 11
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 100000
+  m_Intensity: 130000
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1129,13 +1129,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 115787395}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.755682, y: 0, z: 0, w: 0.6549388}
+  m_LocalRotation: {x: 0.99780154, y: 0, z: 0, w: 0.06627396}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 98.17, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 172.4, y: 0, z: 0}
 --- !u!114 &115787398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1193,7 +1193,7 @@ MonoBehaviour:
   moonPhase: 0.2
   moonPhaseRotation: 0
   earthshine: 1
-  flareSize: 2
+  flareSize: 0
   flareTint: {r: 1, g: 1, b: 1, a: 1}
   flareFalloff: 4
   flareMultiplier: 1
@@ -1615,7 +1615,7 @@ Transform:
   m_GameObject: {fileID: 136418994}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -367.3, y: -5.72, z: 254.7}
+  m_LocalPosition: {x: -367.3, y: -3.5, z: 254.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2786,6 +2786,55 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1496c843ff50fd245afcb63247a1b541, type: 3}
+--- !u!1 &330811055
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 330811057}
+  - component: {fileID: 330811056}
+  m_Layer: 0
+  m_Name: Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &330811056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330811055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: c02fb93d5d9fa7640a9be368b63c85df, type: 2}
+--- !u!4 &330811057
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330811055}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -123.58669, y: 82.47424, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &332201331 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1650260978875517423, guid: 7368b63df0629874cbee543535faae35, type: 3}
@@ -5382,7 +5431,7 @@ MonoBehaviour:
   surfaceType: 0
   geometryType: 3
   meshRenderers: []
-  timeMultiplier: 0.5
+  timeMultiplier: 0.9
   scriptInteractions: 1
   cpuEvaluateRipples: 0
   customMaterial: {fileID: 0}
@@ -5391,18 +5440,18 @@ MonoBehaviour:
   smoothnessFadeStart: 100
   smoothnessFadeDistance: 500
   tessellation: 1
-  maxTessellationFactor: 3
+  maxTessellationFactor: 1.22
   tessellationFactorFadeStart: 150
   tessellationFactorFadeRange: 1850
   refractionColor: {r: 0.7218716, g: 1, b: 1, a: 1}
-  maxRefractionDistance: 0.5
-  absorptionDistance: 1.5
+  maxRefractionDistance: 0.32
+  absorptionDistance: 0.05
   scatteringColor: {r: 0, g: 0.07607294, b: 0.07607294, a: 1}
-  ambientScattering: 0.2
-  heightScattering: 0.2
+  ambientScattering: 0.101
+  heightScattering: 0.192
   displacementScattering: 0.1
   directLightTipScattering: 0.6
-  directLightBodyScattering: 0.5
+  directLightBodyScattering: 0.408
   maximumHeightOverride: 0
   caustics: 0
   causticsIntensity: 0.5
@@ -5449,8 +5498,8 @@ MonoBehaviour:
   deformationRes: 512
   foam: 1
   foamResolution: 512
-  foamPersistenceMultiplier: 0.5
-  foamCurrentInfluence: 0.6
+  foamPersistenceMultiplier: 0.403
+  foamCurrentInfluence: 0.689
   foamColor: {r: 1, g: 1, b: 1, a: 1}
   foamTextureTiling: 0.15
   foamSmoothness: 1
@@ -5503,7 +5552,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   repetitionSize: 1409
   largeOrientationValue: 0
-  largeWindSpeed: 86
+  largeWindSpeed: 24
   largeChaos: 0.85
   largeBand0Multiplier: 1
   largeBand0FadeMode: 1
@@ -5516,8 +5565,8 @@ MonoBehaviour:
   ripples: 1
   ripplesMotionMode: 0
   ripplesOrientationValue: 0
-  ripplesWindSpeed: 8
-  ripplesChaos: 0.8
+  ripplesWindSpeed: 7.06
+  ripplesChaos: 0.574
   ripplesFadeMode: 1
   ripplesFadeStart: 50
   ripplesFadeDistance: 200
@@ -6031,7 +6080,7 @@ TerrainCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 2
   m_TerrainData: {fileID: 15600000, guid: cf76a41cc8875bf40b5206413113b7fa, type: 2}
@@ -8353,7 +8402,7 @@ MonoBehaviour:
   player: {fileID: 135940854}
   compassBar: {fileID: 908743702}
   markerPrefab: {fileID: 1878128073792794914, guid: 89e8905a084a1024da31feb47c2dd996, type: 3}
-  compassWidth: 882
+  compassWidth: 1000
   maxMarkerDistance: 1000
 --- !u!114 &908743704
 MonoBehaviour:
@@ -8622,7 +8671,7 @@ Transform:
   m_GameObject: {fileID: 948418104}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -174.2, y: -24.36, z: 227}
+  m_LocalPosition: {x: -174.2, y: -16, z: 227}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12121,7 +12170,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 146281183362743499, guid: 962b3bc8cfb64ac4cbdf99003a38ce22, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.1086967
+      value: 4.02
       objectReference: {fileID: 0}
     - target: {fileID: 146281183362743499, guid: 962b3bc8cfb64ac4cbdf99003a38ce22, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12872,7 +12921,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!154 &1568762551
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -13785,8 +13834,8 @@ Transform:
   m_GameObject: {fileID: 1739807726}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -176.54, y: 0.1238, z: -59.14}
-  m_LocalScale: {x: 21.229284, y: 1.1769832, z: 17.28296}
+  m_LocalPosition: {x: -176.54, y: 0.1238, z: -32.6}
+  m_LocalScale: {x: 53.8778, y: 2.9870658, z: 56.052666}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -14830,7 +14879,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -300.4, y: 3.2424, z: 124.8}
-  m_LocalScale: {x: 21.30213, y: 2.8140113, z: 21.30213}
+  m_LocalScale: {x: 42.5297, y: 2.8140113, z: 33.71062}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -15470,7 +15519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defeatObjective: {fileID: 11400000, guid: 107cd726dd70d7642b2efd00969809e9, type: 2}
   enemyPrefab: {fileID: 4477557821618875988, guid: 6d492ce2dd2a800449b1091106475e55, type: 3}
-  enemyCount: 8
+  enemyCount: 2
   spawnAreaOffset: {x: 0, y: 0, z: 0}
   spawnAreaSize: {x: 400, y: 0, z: 422.3}
   showSpawnArea: 1
@@ -17319,3 +17368,4 @@ SceneRoots:
   - {fileID: 602015587}
   - {fileID: 21127783}
   - {fileID: 1899369901}
+  - {fileID: 330811057}

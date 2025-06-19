@@ -47,10 +47,27 @@ public class ScreenFader : MonoBehaviour
         fadeCanvasGroup.alpha = to;
     }
 
-    private IEnumerator FadeOutAndReload()
+private IEnumerator FadeOutAndReload()
+{
+    yield return FadeCanvasGroup(0f, 1f); // Fade to black
+    
+    // Reset quest state before loading main menu
+    ResetGameState();
+    
+    yield return new WaitForSeconds(delayBeforeRestart);
+    SceneManager.LoadScene(0);
+}
+
+private void ResetGameState()
+{
+    // Reset QuestManager state
+    if (QuestManager.Instance != null)
     {
-        yield return FadeCanvasGroup(0f, 1f); // Fade to black
-        yield return new WaitForSeconds(delayBeforeRestart);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
+        QuestManager.Instance.ResetQuestState();
+    }
+    
+#if UNITY_EDITOR
+    Debug.Log("Game state reset before returning to main menu");
+#endif
+}
 }

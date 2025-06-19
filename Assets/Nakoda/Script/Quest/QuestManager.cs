@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 public class QuestManager : MonoBehaviour
 {
     public static QuestManager Instance { get; private set; }
@@ -14,8 +15,15 @@ public class QuestManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+ if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Start()
@@ -151,7 +159,11 @@ public void UpdateObjectives()
             }
         }
     }
-
+    if (AreAllQuestsCompleted())
+    {
+        StartCoroutine(ReturnToMainMenuAfterDelay());
+        return;
+    }
     // Always update currentQuest and progress after quest completion
     if (currentQuest == null && activeQuests.Count > 0)
     {
@@ -235,7 +247,55 @@ private string GetObjectiveProgressText(QuestData quest)
 
     return string.Join("\n", progressLines);
 }
+public void ResetQuestState()
+{
+    // Clear all quest lists
+    activeQuests.Clear();
+    completedQuests.Clear();
+    currentQuest = null;
+    
+    // Reset all quest objectives
+    foreach (var quest in allQuests)
+    {
+        if (quest != null)
+        {
+            quest.ResetObjectives();
+        }
+    }
+    
+    // Clear UI
+    QuestUIController.Instance?.HideQuest();
+    
+#if UNITY_EDITOR
+    Debug.Log("Quest state completely reset");
+#endif
+}
 
+private bool AreAllQuestsCompleted()
+{
+    // Check if all quests in the game are completed
+    return completedQuests.Count >= allQuests.Count && activeQuests.Count == 0;
+}
+
+private System.Collections.IEnumerator ReturnToMainMenuAfterDelay()
+{
+    // Show completion message
+    QuestUIController.Instance?.ShowQuest("All Quests Complete!", "Returning to main menu...");
+    
+    yield return new WaitForSeconds(3f); // Wait 3 seconds
+    
+    // Find ScreenFader and use it to transition
+    ScreenFader fader = FindFirstObjectByType<ScreenFader>();
+    if (fader != null)
+    {
+        fader.FadeAndRestart();
+    }
+    else
+    {
+        // Fallback: direct scene load
+        SceneManager.LoadScene(0);
+    }
+}
 
 #if UNITY_EDITOR
     [InitializeOnLoadMethod]

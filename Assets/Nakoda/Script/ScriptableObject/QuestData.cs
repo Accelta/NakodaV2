@@ -32,9 +32,15 @@ public class QuestData : ScriptableObject
     // In QuestData
 public void ResetObjectives()
 {
-    foreach (var obj in objectives)
+    if (objectives != null)
     {
-        obj.ResetObjective();
+        foreach (var objective in objectives)
+        {
+            if (objective != null)
+            {
+                objective.ResetObjective();
+            }
+        }
     }
 }
 

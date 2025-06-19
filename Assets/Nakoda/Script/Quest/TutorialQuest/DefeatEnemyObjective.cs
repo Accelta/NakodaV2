@@ -69,9 +69,7 @@ using System.Collections;
 
 [CreateAssetMenu(fileName = "DefeatEnemiesObjective", menuName = "Quests/Objective/Defeat Enemies")]
 public class DefeatEnemiesObjective : QuestObjective
-{
-    public List<GameObject> enemies;
-    private HashSet<GameObject> aliveEnemies = new();
+{    private HashSet<GameObject> aliveEnemies = new();
     private EnemyTracker tracker;
     private List<CompassTarget> enemyTargets = new List<CompassTarget>(); // Store all enemy markers
     private EnemySpawner spawner;
